@@ -1,0 +1,594 @@
+# كود لوحة تحكم الإدارة الفائقة والتحكم الكامل - وظائف إب (Super Admin Dashboard)
+**Wazaef Ibb - Latest Super Admin Command & Control Dashboard HTML Code**
+
+يمكنك نسخ هذا الكود بالكامل وحفظه كملف `admin-dashboard.html` وتشغيله في أي متصفح مباشرة، أو تصديره إلى مشروعك.
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>وظائف إب - مركز الإدارة الشامل والتحكم الفائق</title>
+  <!-- Google Fonts: Tajawal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Pro / Free Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#0a192f',
+              dark: '#0f172a',
+              sapphire: '#1e3a8a',
+              blue: '#2563eb',
+              lightBlue: '#38bdf8',
+              emerald: '#059669',
+              green: '#10b981',
+              gold: '#f59e0b',
+              amber: '#d97706',
+              surface: '#f8fafc',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f1f5f9;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-800 antialiased selection:bg-brand-blue selection:text-white">
+
+  <!-- Top Global System Bar -->
+  <header class="bg-brand-navy text-white px-6 py-3 border-b border-slate-700/60 sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-black text-xl">
+          <i class="fa-solid fa-briefcase"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-lg tracking-tight">وظائف إب - مركز الإدارة الشامل</h1>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              المزامنة الحية: Firebase نشط
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">لوحة الإدارة المركزية والتحكم بكافة مديريات محافظة إب</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 text-sm">
+        <div class="bg-slate-800/80 border border-slate-700 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
+          <span class="text-slate-400">حساب محفظة جيب الرسمي:</span>
+          <span class="font-mono font-bold text-amber-400 tracking-wider">770088836</span>
+          <button onclick="navigator.clipboard.writeText('770088836'); alert('تم نسخ رقم حساب جيب: 770088836');" class="text-slate-400 hover:text-white transition">
+            <i class="fa-regular fa-copy"></i>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3 border-r border-slate-700 pr-4">
+          <div class="relative cursor-pointer">
+            <i class="fa-regular fa-bell text-lg text-slate-300 hover:text-white"></i>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-[10px] font-bold rounded-full flex items-center justify-center">5</span>
+          </div>
+          <div class="flex items-center gap-2.5 pl-2">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-xs shadow-inner">
+              SA
+            </div>
+            <div class="hidden sm:block text-right">
+              <div class="text-xs font-bold leading-tight">مدير النظام الأقدم</div>
+              <div class="text-[10px] text-emerald-400">Super Admin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Layout -->
+  <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Sidebar Navigation (Desktop) -->
+    <aside class="lg:col-span-3 space-y-4">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4">
+        <nav class="space-y-1">
+          <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-blue-50 text-brand-blue font-bold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>نظرة عامة والإحصائيات</span>
+            </span>
+            <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+          </a>
+          <a href="#kyc" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>إدارة المستخدمين والتوثيق</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700">24 معلق</span>
+          </a>
+          <a href="#jobs-ads" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-rectangle-ad"></i>
+              <span>الشواغر والإعلانات التجارية</span>
+            </span>
+            <span class="text-xs text-slate-400">1,240 نشط</span>
+          </a>
+          <a href="#banners" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-images"></i>
+              <span>مكتبة الوسائط والبنرات</span>
+            </span>
+            <span class="text-xs text-emerald-600 font-semibold">Firebase CDN</span>
+          </a>
+          <a href="#payments" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-wallet"></i>
+              <span>محفظة جيب والمالية</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">18 تدقيق</span>
+          </a>
+          <a href="#reports" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>البلاغات والدعم الفني</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-700">3 بلاغ</span>
+          </a>
+          <a href="#settings" class="flex items-center justify-between px-3 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold text-sm transition">
+            <span class="flex items-center gap-3">
+              <i class="fa-solid fa-sliders"></i>
+              <span>إعدادات النظام والفايربيس</span>
+            </span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Cloud Status Widget -->
+      <div class="bg-gradient-to-br from-brand-navy to-slate-900 rounded-2xl p-4 text-white shadow-sm border border-slate-700/80 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-cloud text-emerald-400"></i>
+            <span class="text-xs font-bold">سحابة الفايربيس (Ibb Cloud)</span>
+          </div>
+          <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/40">متصل بنجاح</span>
+        </div>
+        <div class="space-y-1.5 text-xs">
+          <div class="flex justify-between text-slate-300">
+            <span>استهلاك Storage:</span>
+            <span class="font-mono font-bold text-white">8.4 GB / 50 GB</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+            <div class="bg-emerald-400 h-1.5 rounded-full" style="width: 17%"></div>
+          </div>
+          <div class="flex justify-between text-slate-400 text-[11px] pt-1">
+            <span>استجابة السيرفر: 24ms</span>
+            <span>Firestore: v11.4 Live</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="lg:col-span-9 space-y-6">
+
+      <!-- Executive Metric Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <!-- Metric 1 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-500">إجمالي المستخدمين</span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+          <div class="text-2xl font-black text-slate-900">18,450</div>
+          <div class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+            <span class="text-emerald-600 font-bold"><i class="fa-solid fa-arrow-up"></i> +12%</span>
+            <span>باحثون: 14,200 | منشآت: 4,250</span>
+          </div>
+        </div>
+
+        <!-- Metric 2 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-500">توثيقات معلقة</span>
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+          </div>
+          <div class="text-2xl font-black text-amber-600">24</div>
+          <div class="text-[11px] text-amber-600/90 mt-1 font-semibold">
+            رخص طبية وسجلات منشآت إب
+          </div>
+        </div>
+
+        <!-- Metric 3 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-500">شواغر وإعلانات نشطة</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+          </div>
+          <div class="text-2xl font-black text-slate-900">1,240</div>
+          <div class="text-[11px] text-slate-500 mt-1">
+            وظائف: 890 | إعلانات تجارية: 350
+          </div>
+        </div>
+
+        <!-- Metric 4 -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-slate-500">حوالات محفظة جيب</span>
+            <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center text-sm">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+            </div>
+          </div>
+          <div class="text-2xl font-black text-purple-700">18 <span class="text-xs font-semibold text-slate-500">عملية</span></div>
+          <div class="text-[11px] text-purple-700 mt-1 font-bold">
+            المبلغ المعلق: 450,000 ريال
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Triggers & District Filter Bar -->
+      <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 text-xs font-bold">
+          <span class="text-slate-400 pl-2"><i class="fa-solid fa-location-dot"></i> المديريات:</span>
+          <button class="px-3 py-1.5 rounded-lg bg-brand-navy text-white">الكل (محافظة إب)</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">الظهار</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">المشنة</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">جبلة</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">يريم</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">السدة</button>
+          <button class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 transition">العدين</button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="alert('جاري تحديث وفهرسة قاعدة بيانات Firebase!');" class="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-arrows-rotate text-blue-600"></i>
+            <span>تحديث الكاش</span>
+          </button>
+          <button onclick="alert('فتح نموذج نشر شاغر أو إعلان جديد للإدارة');" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-plus"></i>
+            <span>إضافة شاغر / إعلان</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Section: Media & Banners + KYC Verification -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Column 1: Banners & Media Storage Control (Firebase) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm space-y-4" id="banners">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <h3 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-images text-brand-blue"></i>
+                بنرات الواجهة ومكتبة الوسائط
+              </h3>
+              <p class="text-xs text-slate-500">التحكم المباشر ببنرات الصفحة الرئيسية للتطبيق</p>
+            </div>
+            <span class="text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-1 rounded-md">Firebase Storage</span>
+          </div>
+
+          <!-- Active Banners List -->
+          <div class="space-y-3">
+            <!-- Banner 1: Ibb Hero -->
+            <div class="border border-slate-200 rounded-xl p-3 bg-slate-50/60 relative group hover:border-blue-400 transition">
+              <div class="relative h-24 rounded-lg overflow-hidden mb-2 bg-slate-900">
+                <img src="https://lh3.googleusercontent.com/aida/AEtjO1UyW1HK09bojB_2EbSzqYzj3uFMaSMCU_ecw9gnXLkv57po6cLEY4PuhpDC-FxpJGCSeC3DTMIW-8L54i3v8j3Y86DUiati_kuVrsB7hfmHBp9tGIFN6kVkWXyJfhrUJXoPXJPpgQUXVjcn46gOSOxSxFHT9qeA9WNXa4dnkcNz0eM_XGCntv5aYmC6pX00K4sBrFVTi_r0XH6kbXQCrmme46SFt7-CZVhvmjTDx0aILTl8VGI3ODtOSFc" alt="Ibb Landscape" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                  <span class="text-[11px] font-bold text-white">بنر الهيرو الرئيسي: جمال الطبيعة واللواء الأخضر</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between text-xs text-slate-600">
+                <span class="text-[11px] font-mono text-slate-400">ibb_hero_terraces.webp</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">نشط بالواجهة</span>
+              </div>
+              <div class="flex items-center gap-1.5 mt-2 pt-2 border-t border-slate-200/70">
+                <button onclick="alert('استبدال صورة بنر الهيرو')" class="flex-1 py-1 px-2 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-[11px] font-bold text-slate-700">
+                  <i class="fa-solid fa-pen-to-square"></i> استبدال
+                </button>
+                <button onclick="alert('تعطيل مؤقت للبنر')" class="py-1 px-2.5 rounded-lg bg-white border border-slate-200 hover:bg-amber-50 text-[11px] font-bold text-amber-600">
+                  <i class="fa-solid fa-pause"></i>
+                </button>
+                <button onclick="confirm('هل تود حذف هذا البنر نهائياً من سحابة التخزين؟')" class="py-1 px-2.5 rounded-lg bg-white border border-slate-200 hover:bg-red-50 text-[11px] font-bold text-red-600">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Banner 2: Alkindi Hospital Ad -->
+            <div class="border border-slate-200 rounded-xl p-3 bg-slate-50/60 relative group hover:border-blue-400 transition">
+              <div class="flex items-center gap-3">
+                <div class="w-16 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-white shrink-0 font-bold text-xs bg-gradient-to-br from-blue-700 to-indigo-900">
+                  إعلان VIP
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="text-xs font-bold text-slate-800 truncate">حملة مستشفى الكندي التخصصي - إب</div>
+                  <div class="text-[10px] text-slate-500">مثبت في سلايدر الإعلانات • ينتهي 30 نوفمبر</div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-2 pt-2 border-t border-slate-200/70 text-xs">
+                <button onclick="alert('تعديل رابط الإعلان')" class="text-slate-600 hover:text-blue-600 font-bold text-[11px]"><i class="fa-solid fa-link"></i> تعديل الرابط</button>
+                <button onclick="alert('تم تمديد فترة التثبيت')" class="text-emerald-600 hover:text-emerald-700 font-bold text-[11px]"><i class="fa-solid fa-clock-rotate-left"></i> تمديد</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Drag and Drop Banner Upload Box -->
+          <div class="border-2 border-dashed border-slate-300 rounded-xl p-4 text-center hover:border-blue-500 bg-blue-50/30 transition cursor-pointer" onclick="document.getElementById('banner-file-input').click();">
+            <input type="file" id="banner-file-input" class="hidden" accept="image/*" onchange="alert('تم اختيار الملف، جاري الرفع إلى Firebase Storage...')">
+            <i class="fa-solid fa-cloud-arrow-up text-2xl text-blue-500 mb-1"></i>
+            <div class="text-xs font-bold text-slate-700">رفع بنر ترويجي جديد (Firebase Storage)</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">يدعم WebP, PNG, JPG بدقة مقترحة 1920x600px</div>
+          </div>
+        </div>
+
+        <!-- Column 2: KYC & Account Verification Requests -->
+        <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm space-y-4" id="kyc">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <h3 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-user-check text-emerald-600"></i>
+                طلبات التوثيق المهني وتفعيل الحسابات
+              </h3>
+              <p class="text-xs text-slate-500">فحص وثائق مزاولة المهنة والسجلات التجارية في إب</p>
+            </div>
+            <span class="text-xs font-bold text-slate-500">الترتيب: الأحدث وصولاً</span>
+          </div>
+
+          <div class="space-y-3">
+            <!-- Verification Item 1: Pharmacist -->
+            <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm shrink-0">
+                    <i class="fa-solid fa-user-doctor"></i>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm text-slate-900">د. أحمد عبده الرعوي</span>
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">صيدلي قانوني</span>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-0.5">
+                      <i class="fa-solid fa-location-dot text-slate-400"></i> مديرية المشنة - شارع تعز • هاتف: 771234567
+                    </div>
+                    <div class="text-[11px] text-slate-600 mt-1.5 flex items-center gap-2 bg-white px-2 py-1 rounded border border-slate-200 inline-block">
+                      <i class="fa-solid fa-file-contract text-blue-600"></i>
+                      <span>ترخيص نقابة صيادلة اليمن رقم: <strong>PH-IBB-8924</strong></span>
+                      <a href="#" onclick="alert('فتح معاينة شهادة التخرج والترخيص الطبي'); return false;" class="text-blue-600 hover:underline font-bold mr-2">معاينة الوثيقة</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2 border-t border-slate-200/70">
+                <button onclick="confirm('هل تود رفض الطلب وطلب إعادة رفع الوثائق؟')" class="px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-xs font-bold">
+                  رفض
+                </button>
+                <button onclick="alert('تم اعتماد توثيق الدكتور أحمد الرعوي ومنح الشارة الموثقة بنجاح!')" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+                  <i class="fa-solid fa-check"></i>
+                  <span>اعتماد التوثيق الرسمي</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Verification Item 2: Hospital -->
+            <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm shrink-0">
+                    <i class="fa-solid fa-hospital"></i>
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-sm text-slate-900">مستشفى الكندي التخصصي</span>
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-800">منشأة طبية كبرى</span>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-0.5">
+                      <i class="fa-solid fa-location-dot text-slate-400"></i> الظهار - شارع المحافظة • سجل تجاري وصحي: CR-2023-9941
+                    </div>
+                    <div class="text-[11px] text-emerald-700 mt-1 font-semibold flex items-center gap-1">
+                      <i class="fa-solid fa-circle-check"></i> تم سداد رسوم باقة التوثيق عبر محفظة جيب (770088836)
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-end gap-2 mt-3 pt-2 border-t border-slate-200/70">
+                <button onclick="alert('تم توثيق حساب مستشفى الكندي التخصصي رسمياً!')" class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+                  <i class="fa-solid fa-shield-check"></i>
+                  <span>توثيق المنشأة رسمياً</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Jobs & Commercial Ads Live Moderation -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm space-y-4" id="jobs-ads">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+          <div>
+            <h3 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-table-list text-brand-blue"></i>
+              إدارة الشواغر، الإعلانات التجارية والبلاغات
+            </h3>
+            <p class="text-xs text-slate-500">مراقبة المحتوى المنشور وتطبيق إجراءات التعديل، التثبيت أو الحذف</p>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 font-bold text-slate-600">إشراف لحظي</span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-right text-xs">
+            <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3">عنوان الشاغر / الإعلان</th>
+                <th class="p-3">الجهة والمديرية</th>
+                <th class="p-3">النوع والتصنيف</th>
+                <th class="p-3">تاريخ النشر</th>
+                <th class="p-3">حالة الإعلان</th>
+                <th class="p-3 text-center">إجراءات المراقبة</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-semibold">
+              <tr class="hover:bg-slate-50/80 transition">
+                <td class="p-3 font-bold text-slate-900">
+                  طبيب عام وطوارئ (دوام ليلي)
+                  <div class="text-[11px] text-slate-400 font-normal">الراتب: 350,000 ريال يمني</div>
+                </td>
+                <td class="p-3">
+                  <div class="text-slate-800">مستشفى المنار التخصصي</div>
+                  <div class="text-[10px] text-slate-400">الظهار - شارع العدين</div>
+                </td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-700">وظيفة عاجلة</span>
+                </td>
+                <td class="p-3 text-slate-500">اليوم 10:30 ص</td>
+                <td class="p-3">
+                  <span class="inline-flex items-center gap-1 text-emerald-600 font-bold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> نشط في التطبيق
+                  </span>
+                </td>
+                <td class="p-3 text-center space-x-2 space-x-reverse">
+                  <button onclick="alert('تعديل بيانات الشاغر')" class="p-1.5 text-slate-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button>
+                  <button onclick="alert('تم تثبيت الشاغر في أعلى قائمة وظائف إب')" class="p-1.5 text-slate-500 hover:text-amber-500"><i class="fa-solid fa-star"></i></button>
+                  <button onclick="confirm('هل تود حذف الشاغر؟')" class="p-1.5 text-slate-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-slate-50/80 transition">
+                <td class="p-3 font-bold text-slate-900">
+                  محاسب مالي قانوني ذو خبرة بنظام أونكس
+                  <div class="text-[11px] text-slate-400 font-normal">إمكانية التثبيت الفوري</div>
+                </td>
+                <td class="p-3">
+                  <div class="text-slate-800">مجموعة السعيد التجارية</div>
+                  <div class="text-[10px] text-slate-400">المشنة - مفرق ميتم</div>
+                </td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">وظيفة دوام كامل</span>
+                </td>
+                <td class="p-3 text-slate-500">أمس 04:15 م</td>
+                <td class="p-3">
+                  <span class="inline-flex items-center gap-1 text-emerald-600 font-bold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> نشط وموثق
+                  </span>
+                </td>
+                <td class="p-3 text-center space-x-2 space-x-reverse">
+                  <button onclick="alert('تعديل بيانات الشاغر')" class="p-1.5 text-slate-500 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button>
+                  <button onclick="alert('تم تثبيت الشاغر')" class="p-1.5 text-slate-500 hover:text-amber-500"><i class="fa-solid fa-star"></i></button>
+                  <button onclick="confirm('هل تود حذف الشاغر؟')" class="p-1.5 text-slate-500 hover:text-red-600"><i class="fa-solid fa-trash"></i></button>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-slate-50/80 transition bg-red-50/20">
+                <td class="p-3 font-bold text-slate-900">
+                  افتتاح مركز إب للأجهزة والمفروشات
+                  <div class="text-[10px] text-red-600 font-bold"><i class="fa-solid fa-triangle-exclamation"></i> بلاغ تكرار إعلان مزعج (Spam)</div>
+                </td>
+                <td class="p-3">
+                  <div class="text-slate-800">إلكترونيات القمة</div>
+                  <div class="text-[10px] text-slate-400">الظهار - خط الدائري</div>
+                </td>
+                <td class="p-3">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700">إعلان تجاري بنر</span>
+                </td>
+                <td class="p-3 text-slate-500">منذ 3 ساعات</td>
+                <td class="p-3">
+                  <span class="inline-flex items-center gap-1 text-amber-600 font-bold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> قيد المراجعة
+                  </span>
+                </td>
+                <td class="p-3 text-center space-x-2 space-x-reverse">
+                  <button onclick="alert('تم حل البلاغ وتثبيت الإعلان')" class="px-2.5 py-1 bg-blue-600 text-white rounded font-bold text-[10px]">حل البلاغ</button>
+                  <button onclick="confirm('إيقاف الإعلان فوراً؟')" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold text-[10px]">إيقاف</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section: Jaib Wallet Realtime Reconciliations -->
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm space-y-4" id="payments">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+          <div>
+            <h3 class="font-extrabold text-sm text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-receipt text-purple-600"></i>
+              حوالات محفظة جيب الفورية (الحساب: 770088836)
+            </h3>
+            <p class="text-xs text-slate-500">إيداعات الشركات وباقات التوظيف عبر المحفظة للتحقق والمطابقة الآلية</p>
+          </div>
+          <div class="text-xs font-mono font-bold text-brand-navy bg-slate-100 px-3 py-1 rounded-lg">
+            Jaib - Ahad Financial
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Payment 1 -->
+          <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/50 flex items-center justify-between gap-3">
+            <div>
+              <div class="text-xs font-bold text-slate-800">مستوصف السلام - يريم</div>
+              <div class="text-[11px] text-slate-500">رقم العملية: <span class="font-mono font-bold text-slate-700">#JB-9018274</span></div>
+              <div class="text-xs font-black text-emerald-600 mt-1">45,000 ريال يمني (باقة تثبيت شهر)</div>
+            </div>
+            <button onclick="alert('تم تأكيد حوالة مستوصف السلام وتفعيل الشاغر فورياً!');" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shrink-0 shadow-sm">
+              تأكيد الحوالة
+            </button>
+          </div>
+
+          <!-- Payment 2 -->
+          <div class="border border-slate-200 rounded-xl p-3.5 bg-slate-50/50 flex items-center justify-between gap-3">
+            <div>
+              <div class="text-xs font-bold text-slate-800">مكتبة النور - إب الدائري</div>
+              <div class="text-[11px] text-slate-500">رقم العملية: <span class="font-mono font-bold text-slate-700">#JB-9018210</span></div>
+              <div class="text-xs font-black text-emerald-600 mt-1">20,000 ريال يمني (إعلان أسبوعين)</div>
+            </div>
+            <button onclick="alert('تم تأكيد حوالة مكتبة النور بنجاح!');" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shrink-0 shadow-sm">
+              تأكيد الحوالة
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-6 text-center text-xs text-slate-500 mt-8">
+    منصة وتطبيق وظائف إب © 2025 - لوحة الإدارة الفائقة والتحكم بالخوادم السحابية Firebase (Ibb Governorate, Yemen).
+  </footer>
+
+</body>
+</html>
+```

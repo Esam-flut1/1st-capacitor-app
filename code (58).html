@@ -1,0 +1,1788 @@
+<!DOCTYPE html><html class="dark" dir="rtl" lang="ar"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>محاكي تطبيق وظائف إب المتطور - Interactive Prototype &amp; Device Emulator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              950: '#030712',
+              900: '#070f1e',
+              850: '#0b162c',
+              800: '#0f2240',
+              700: '#1e3a8a',
+              accent: '#06b6d4',
+              teal: '#0d9488',
+              gold: '#f59e0b',
+              emerald: '#10b981',
+              jaib: '#00c389'
+            }
+          },
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+            mono: ['Plus Jakarta Sans', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #030712;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 60%),
+        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 80%);
+      background-attachment: fixed;
+    }
+
+    /* Ambient Dot Grid */
+    .bg-grid-dots {
+      background-size: 24px 24px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    }
+
+    /* Slick scrollbars */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 9999px;
+    }
+
+    /* Titanium Bezel & Premium Lighting */
+    .titanium-frame {
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.12),
+        0 0 0 4px #1f2937,
+        0 0 0 6px #374151,
+        0 25px 75px -12px rgba(0, 0, 0, 0.95),
+        0 0 50px -10px rgba(6, 182, 212, 0.25);
+    }
+    .glass-specular {
+      position: relative;
+    }
+    .glass-specular::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+      transform: skewX(-25deg);
+      pointer-events: none;
+    }
+
+    /* Screen Animations */
+    .screen-in {
+      animation: screenFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes screenFadeIn {
+      from { opacity: 0; transform: scale(0.985) translateY(4px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Pulse Glow */
+    .pulse-glow {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    }
+  </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col text-slate-100 select-none bg-grid-dots">
+<!-- ==================== TOP NAVIGATION CHROME ==================== -->
+<header class="h-16 px-6 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80 flex items-center justify-between z-30 shrink-0">
+<!-- Brand Title & Tag -->
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25 ring-1 ring-white/20">
+<i class="fa-solid fa-briefcase text-lg"></i>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-sm font-extrabold text-white tracking-wide">محاكي تطبيق وظائف إب</h1>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+            نسخة تفاعلية حية v2.4 PRO
+          </span>
+</div>
+<p class="text-[11px] text-slate-400">سوق التوظيف الذكي وخدمات الدفع بمحفظة جيب - محافظة إب، اليمن</p>
+</div>
+</div>
+<!-- Central Switcher: Job Seeker vs Employer -->
+<div class="flex items-center bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-inner">
+<button class="flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-600/30" id="mode-seeker-btn" onclick="switchRole('seeker')">
+<i class="fa-solid fa-user-tie"></i>
+<span class="">وضع الباحث عن عمل</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all duration-200" id="mode-employer-btn" onclick="switchRole('employer')">
+<i class="fa-solid fa-building"></i>
+<span class="">وضع الشركات وأصحاب الأعمال</span>
+</button>
+</div>
+<!-- Quick Action Bar -->
+<div class="flex items-center gap-2.5">
+<!-- FPS & Live Status Badge -->
+<div class="hidden xl:flex items-center gap-2 px-3 py-1 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] font-mono text-emerald-400">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span id="fps-counter" class="">60 FPS</span>
+<span class="text-slate-600">|</span>
+<span class="text-slate-400">Online API</span>
+</div>
+<!-- Dev Tools Modal Trigger -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold border border-slate-700/80 transition" onclick="toggleModal('api-modal')" title="عرض مخطط قواعد البيانات والـ API">
+<i class="fa-solid fa-code text-cyan-400"></i>
+<span class="">مخطط DB &amp; API</span>
+</button>
+<!-- Full Source Code Download Trigger -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 text-xs font-semibold border border-emerald-700/50 transition shadow-sm" onclick="downloadEmulatorSource()" title="تحميل الكود كاملاً كملف HTML مستقل">
+<i class="fa-solid fa-download text-xs text-emerald-400"></i>
+<span class="">تحميل الكود (HTML)</span>
+</button>
+<!-- Reset -->
+<button class="w-8 h-8 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center border border-slate-800 transition" onclick="resetApp()" title="إعادة تعيين المحاكي">
+<i class="fa-solid fa-rotate-right text-xs"></i>
+</button>
+</div>
+</header>
+<!-- ==================== MAIN WORKSPACE ==================== -->
+<main class="flex-1 flex overflow-hidden">
+<!-- RIGHT/SIDE PANEL: SCREEN DIRECTORY & FEATURES -->
+<aside class="w-84 bg-slate-950/70 border-l border-slate-800/80 flex flex-col z-20 backdrop-blur-xl">
+<!-- Section Header -->
+<div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
+<div>
+<span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">دليل الشاشات والتدفقات</span>
+<p class="text-xs text-slate-300 font-medium">انقر للتنقل المباشر وتجربة الشاشة:</p>
+</div>
+<span class="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded-md border border-cyan-800/40 font-mono" id="role-badge">SEEKER_FLOW</span>
+</div>
+<!-- Scrollable Navigation Tree -->
+<div class="flex-1 overflow-y-auto custom-scroll p-3 space-y-4">
+<!-- Job Seeker Navigation Group -->
+<div class="space-y-1" id="group-seeker">
+<div class="px-2 py-1 text-[11px] font-bold text-cyan-400 flex items-center justify-between">
+<span class="flex items-center gap-1.5">
+<i class="fa-solid fa-street-view"></i> مسار الباحث عن عمل
+            </span>
+<span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.2 rounded font-mono">7 شاشات</span>
+</div>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition-all bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" id="nav-btn-home" onclick="navigate('home')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-house text-cyan-400 w-4 text-center"></i>
+              الرئيسية (سوق الوظائف الشاغرة)
+            </span>
+<i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-job_detail" onclick="navigate('job_detail')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-notes-medical text-emerald-400 w-4 text-center"></i>
+              تفاصيل الوظيفة والتقديم الفوري
+            </span>
+<span class="text-[9px] bg-emerald-950/80 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-800/40">شواغر إب</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-payment_jaib" onclick="navigate('payment_jaib')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-wallet text-jaib w-4 text-center"></i>
+              بوابة الدفع (محفظة جيب 770088836)
+            </span>
+<span class="text-[9px] bg-emerald-900/50 text-emerald-300 px-1.5 py-0.5 rounded font-mono">JAIB WALLET</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-my_applications" onclick="navigate('my_applications')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-timeline text-indigo-400 w-4 text-center"></i>
+              طلباتي (تتبع مراحل المقابلة)
+            </span>
+<span class="text-[9px] bg-indigo-950 text-indigo-300 px-1.5 py-0.5 rounded">محدث</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-vip_upgrade" onclick="navigate('vip_upgrade')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-crown text-amber-400 w-4 text-center"></i>
+              ترقية العضوية الذهبية VIP
+            </span>
+<span class="text-[9px] bg-amber-950 text-amber-400 px-1.5 py-0.5 rounded">باقة تميز</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-ads_directory" onclick="navigate('ads_directory')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-rectangle-ad text-yellow-400 w-4 text-center"></i>
+              دليل الإعلانات والخدمات التجارية
+            </span>
+<i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-profile" onclick="navigate('profile')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-circle-user text-cyan-400 w-4 text-center"></i>
+              الملف الشخصي والسيرة الذاتية (CV)
+            </span>
+<i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+</button>
+</div>
+<!-- Employer Navigation Group -->
+<div class="space-y-1" id="group-employer">
+<div class="px-2 py-1 text-[11px] font-bold text-blue-400 flex items-center justify-between">
+<span class="flex items-center gap-1.5">
+<i class="fa-solid fa-building-user"></i> مسار الشركات وأصحاب الأعمال
+            </span>
+<span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.2 rounded font-mono">6 شاشات</span>
+</div>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-employer_dashboard" onclick="navigate('employer_dashboard')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-chart-pie text-cyan-400 w-4 text-center"></i>
+              لوحة تحكم المنشأة ومؤشرات التوظيف
+            </span>
+<i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-candidates_list" onclick="navigate('candidates_list')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-users text-blue-400 w-4 text-center"></i>
+              فرز المتقدمين الذكي (AI Match 96%)
+            </span>
+<span class="text-[9px] bg-blue-900/60 text-cyan-300 px-1.5 py-0.5 rounded">فرز آلي</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-candidate_detail" onclick="navigate('candidate_detail')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-id-card-clip text-teal-400 w-4 text-center"></i>
+              ملف المرشح (د. أحمد الرعوي)
+            </span>
+<span class="text-[9px] bg-emerald-950 text-emerald-400 px-1.5 py-0.5 rounded">موثق</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-employer_chat" onclick="navigate('employer_chat')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-comments text-cyan-400 w-4 text-center"></i>
+              محادثة التوظيف المباشرة (Live Chat)
+            </span>
+<span class="text-[9px] bg-cyan-950 text-cyan-300 px-1.5 py-0.5 rounded">تفاعلي</span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-post_job" onclick="navigate('post_job')">
+<span class="flex items-center gap-2.5">
+<i class="fa-solid fa-circle-plus text-emerald-400 w-4 text-center"></i>
+              نشر شاغر جديد ومشاركته
+            </span>
+<i class="fa-solid fa-chevron-left text-[9px] opacity-70"></i>
+</button><button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-900/80 flex items-center justify-between transition-all" id="nav-btn-submit_review" onclick="navigate('submit_review')"><span class="flex items-center gap-2.5"><i class="fa-solid fa-file-shield text-amber-400 w-4 text-center"></i>طلب اعتماد شاغر (Super Admin)</span><span class="text-[9px] bg-amber-950/80 text-amber-300 px-1.5 py-0.5 rounded border border-amber-800/40">إرسال للأدمن</span></button>
+</div>
+<!-- Push Simulation & Interactive Triggers -->
+<div class="pt-3 border-t border-slate-800/80 space-y-2">
+<div class="px-2 text-[11px] font-bold text-slate-400">تجارب التفاعل والإشعارات الحية:</div>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-850 text-amber-300 border border-slate-800 flex items-center justify-between transition shadow-sm" onclick="triggerNotificationModal()">
+<span class="flex items-center gap-2">
+<i class="fa-solid fa-bell text-amber-400 animate-bounce"></i>
+              إرسال إشعار مقابلة عمل فوري (Push)
+            </span>
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+</button>
+<button class="w-full text-right px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-950/40 hover:bg-emerald-900/50 text-emerald-300 border border-emerald-800/50 flex items-center justify-between transition" onclick="copyToClipboard('770088836', 'تم نسخ رقم محفظة جيب 770088836 بنجاح!')">
+<span class="flex items-center gap-2">
+<i class="fa-regular fa-copy text-emerald-400"></i>
+              نسخ رقم محفظة جيب (770088836)
+            </span>
+<span class="font-mono text-[10px]">COPY</span>
+</button>
+</div>
+</div>
+<!-- Quick Platform Meta Footer -->
+<div class="p-3 bg-slate-950/90 border-t border-slate-800/80 text-[11px] text-slate-400 space-y-1.5 font-mono">
+<div class="flex items-center justify-between">
+<span class="text-slate-500">نطاق المحافظة:</span>
+<span class="text-slate-200">إب، يريم، جبلة، العدين</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-slate-500">محفظة جيب:</span>
+<span class="text-emerald-400 font-bold">770088836</span>
+</div>
+</div>
+</aside>
+<!-- CENTER CANVAS: PHONE EMULATOR STAGE -->
+<section class="flex-1 flex flex-col items-center justify-center p-4 relative overflow-hidden bg-slate-950/30">
+<!-- Emulation Controls Top Bar (Device Skin & Scale Switcher) -->
+<div class="mb-3 flex items-center gap-2 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-800 text-xs shadow-lg">
+<span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+<i class="fa-solid fa-mobile-screen-button text-cyan-400"></i>
+          مظهر الإطار:
+        </span>
+<button class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition" id="skin-titanium-btn" onclick="setDeviceSkin('titanium')">
+          iPhone 15 Pro تيتانيوم
+        </button>
+<button class="px-2.5 py-0.5 rounded-full text-[11px] text-slate-400 hover:text-white transition" id="skin-minimal-btn" onclick="setDeviceSkin('minimal')">
+          إطار نحيف (Borderless)
+        </button>
+<span class="text-slate-700">|</span>
+<button class="text-[11px] text-amber-400 hover:text-amber-300 flex items-center gap-1" onclick="triggerNotificationModal()">
+<i class="fa-solid fa-bell text-[10px]"></i> تجربة إشعار
+        </button>
+</div>
+<!-- Device Chassis Container -->
+<div class="relative transition-all duration-300 flex items-center justify-center" id="device-wrapper">
+<!-- Physical iPhone 15 Pro Frame Outer Bezel -->
+<div class="w-[392px] h-[818px] bg-[#111827] rounded-[54px] p-[11px] titanium-frame relative flex flex-col overflow-hidden transition-all duration-300" id="phone-chassis">
+<!-- Titanium Physical Volume Buttons (Left Side) -->
+<div class="absolute -left-[5px] top-[110px] w-[5px] h-[28px] bg-slate-700 rounded-l-md border-r border-slate-900"></div>
+<div class="absolute -left-[5px] top-[160px] w-[5px] h-[48px] bg-slate-700 rounded-l-md border-r border-slate-900"></div>
+<div class="absolute -left-[5px] top-[220px] w-[5px] h-[48px] bg-slate-700 rounded-l-md border-r border-slate-900"></div>
+<!-- Power / Side Button (Right Side) -->
+<div class="absolute -right-[5px] top-[175px] w-[5px] h-[68px] bg-slate-700 rounded-r-md border-l border-slate-900"></div>
+<!-- Phone Inner Screen Display -->
+<div class="w-full h-full bg-[#070f1e] rounded-[44px] overflow-hidden flex flex-col relative select-text border border-white/5 glass-specular shadow-inner">
+<!-- DYNAMIC ISLAND / TOP STATUS BAR -->
+<div class="w-full h-11 px-7 pt-2 flex items-center justify-between text-white text-[12px] font-semibold tracking-tight z-50 bg-[#070f1e] shrink-0">
+<!-- Live Arabic/Local Clock -->
+<span class="font-mono text-xs text-slate-200" id="phone-clock">21:36</span>
+<!-- Dynamic Island Pill -->
+<div class="w-26 h-6 bg-black rounded-full flex items-center justify-between px-2.5 cursor-pointer hover:scale-105 transition-transform active:scale-95 shadow-md border border-white/10" id="dynamic-island" onclick="triggerNotificationModal()" title="انقر لتجربة التنبيه التفاعلي">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-cyan-500/80"></div>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-[9px] font-mono text-cyan-400">إب</span>
+<div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+</div>
+</div>
+<!-- Status Icons (5G, WiFi, Battery with bolt) -->
+<div class="flex items-center gap-1.5 text-slate-300 text-xs">
+<span class="text-[10px] font-mono font-bold">5G</span>
+<i class="fa-solid fa-wifi text-[10px]"></i>
+<div class="flex items-center text-[10px]">
+<i class="fa-solid fa-bolt text-[9px] text-amber-400 ml-0.5"></i>
+<i class="fa-solid fa-battery-three-quarters text-emerald-400"></i>
+</div>
+</div>
+</div>
+<!-- IN-APP PUSH NOTIFICATION BANNER (Smooth Spring Dropdown) -->
+<div class="absolute top-12 left-3 right-3 z-50 bg-slate-900/95 border border-cyan-500/60 rounded-2xl p-3 shadow-2xl backdrop-blur-xl -translate-y-40 opacity-0 transition-all duration-300 flex items-start gap-3 cursor-pointer hover:border-cyan-400" id="in-app-toast" onclick="handleNotificationClick()">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-cyan-500/30">
+<i class="fa-solid fa-calendar-check text-sm"></i>
+</div>
+<div class="flex-1 min-w-0 text-right">
+<div class="flex items-center justify-between mb-0.5">
+<span class="text-xs font-bold text-white flex items-center gap-1.5">
+                    دعوة لمقابلة عمل رسمية
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+</span>
+<span class="text-[10px] text-cyan-400 font-mono">الآن</span>
+</div>
+<p class="text-[11px] text-slate-300 line-clamp-1">مستشفى النور التخصصي - إب: تم قبول ملفكم ودعوتكم للمقابلة، انقر لفتح المحادثة.</p>
+</div>
+</div>
+<!-- TOAST MESSAGE FOR COPIED DATA / ALERTS -->
+<div class="absolute bottom-16 left-4 right-4 z-50 bg-emerald-950/95 border border-emerald-500/60 text-emerald-200 text-center py-2 px-3 rounded-xl text-xs font-bold shadow-2xl transition-all duration-300 opacity-0 translate-y-3 pointer-events-none" id="mini-toast">
+              تم بنجاح!
+            </div>
+<!-- APP VIEWPORT: DYNAMIC SCREEN CONTAINER -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative bg-[#070f1e] text-slate-100 flex flex-col screen-in" id="app-viewport">
+            <!-- Top App Bar -->
+            <div class="p-4 bg-gradient-to-b from-[#0e1d38] to-[#070f1e] border-b border-slate-800/80 sticky top-0 z-20 backdrop-blur-md">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs border border-cyan-500/30">
+                    إب
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-slate-400 block leading-tight">الموقع المحدد</span>
+                    <span class="text-xs font-bold text-white flex items-center gap-1">
+                      محافظة إب، اليمن <i class="fa-solid fa-angle-down text-[10px] text-cyan-400"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="navigate('vip_upgrade')" class="px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-[11px] font-bold flex items-center gap-1 shadow-sm">
+                    <i class="fa-solid fa-crown text-[10px]"></i> VIP
+                  </button>
+                  <button onclick="triggerNotificationModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center relative border border-slate-700/60">
+                    <i class="fa-regular fa-bell text-xs"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Search Bar with Live Filter Input -->
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                <input type="text" placeholder="ابحث عن وظيفة، صيدلي، محاسب، أو شركة في إب..." class="w-full bg-slate-900/90 text-white placeholder-slate-400 text-xs rounded-xl py-2.5 pr-9 pl-10 border border-slate-700 focus:outline-none focus:border-cyan-500 transition shadow-inner">
+                <button class="absolute left-2.5 top-2 p-1 text-slate-400 hover:text-cyan-400">
+                  <i class="fa-solid fa-sliders text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-4 space-y-4">
+              
+              <!-- Sector Filter Chips -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-slate-200">القطاعات الأكثر طلباً بإب</span>
+                  <span class="text-[11px] text-cyan-400 font-medium cursor-pointer">عرض الكل</span>
+                </div>
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                  <button class="px-3 py-1.5 rounded-xl bg-cyan-600 text-white text-[11px] font-bold shrink-0 shadow-md">الكل (120+)</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">🏥 صحة وصيدلة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">💼 إدارة ومحاسبة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">💻 تقنية وهندسة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">🛍️ تسويق ومبيعات</button>
+                </div>
+              </div>
+
+              <!-- Official Jaib Wallet Promo Card -->
+              <div onclick="navigate('payment_jaib')" class="p-3.5 rounded-2xl bg-gradient-to-r from-teal-950/80 via-slate-900 to-cyan-950/80 border border-emerald-500/40 flex items-center justify-between cursor-pointer hover:border-emerald-400 transition shadow-lg group">
+                <div class="space-y-1">
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60 font-mono">شريك الدفع المعتمد</span>
+                  <h4 class="text-xs font-bold text-white group-hover:text-cyan-300 transition">ترقية إعلاناتك عبر محفظة جيب</h4>
+                  <p class="text-[10px] text-slate-300">حساب المنصة: <span class="font-mono text-emerald-300 font-bold">770088836</span></p>
+                </div>
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-black text-sm shrink-0 border border-emerald-500/40 shadow-inner">
+                  جيب
+                </div>
+              </div>
+
+              <!-- Urgent Vacancies List -->
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-200">أحدث الشواغر الشاغرة (محافظة إب)</span>
+                  <span class="text-[10px] text-slate-400">12 شاغر اليوم</span>
+                </div>
+
+                <!-- Job Card 1: Pharmacist -->
+                <div onclick="navigate('job_detail')" class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition active:scale-[0.99] space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-blue-950 border border-blue-800 text-cyan-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-hospital"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                          صيدلي قانوني متفرغ
+                          <span class="text-[9px] bg-emerald-950 text-emerald-400 px-1.5 py-0.5 rounded font-semibold border border-emerald-800/40">شاغر عاجل</span>
+                        </h3>
+                        <p class="text-[11px] text-slate-400">مستشفى النور التخصصي • إب - الدائري الغربي</p>
+                      </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-amber-400 text-xs"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-clock text-cyan-400 ml-1"></i>دوام كامل</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold"><i class="fa-solid fa-coins text-amber-400 ml-1"></i>250,000 ريال يمني</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-house-medical text-cyan-400 ml-1"></i>سكن موفر</span>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800/70 text-[10px]">
+                    <span class="text-slate-400">نُشر قبل ساعتين • 14 متقدم</span>
+                    <span class="text-cyan-400 font-bold flex items-center gap-1">عرض التفاصيل والتقديم <i class="fa-solid fa-arrow-left text-[9px]"></i></span>
+                  </div>
+                </div>
+
+                <!-- Job Card 2: Accountant -->
+                <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-800 text-indigo-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-calculator"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white">محاسب عام ومسؤول مخازن</h3>
+                        <p class="text-[11px] text-slate-400">مجموعة السعيد التجارية • إب - شارع العدين</p>
+                      </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-amber-400 text-xs"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800">دوام صباحي</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold">200,000 ريال يمني</span>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800/70 text-[10px]">
+                    <span class="text-slate-400">نُشر قبل 4 ساعات</span>
+                    <span class="text-cyan-400 font-semibold">تفاصيل الشاغر</span>
+                  </div>
+                </div>
+
+                <!-- Job Card 3: IT -->
+                <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-800 text-cyan-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-server"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white">مهندس شبكات وسيرفرات</h3>
+                        <p class="text-[11px] text-slate-400">مجمع النجوم الطبي • إب - مفرق جبلة</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800">دوام كامل</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold">300,000 ريال يمني</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+<!-- BOTTOM APP TAB BAR -->
+<nav class="w-full bg-[#070f1e]/95 border-t border-slate-800/90 px-4 py-2 flex items-center justify-between z-40 backdrop-blur-lg shrink-0" id="app-tab-bar">
+          <button onclick="navigate('home')" class="flex flex-col items-center gap-0.5 text-cyan-400 font-bold">
+            <i class="fa-solid fa-house text-sm"></i>
+            <span class="text-[10px]">الرئيسية</span>
+          </button>
+          <button onclick="navigate('ads_directory')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200">
+            <i class="fa-solid fa-rectangle-ad text-sm"></i>
+            <span class="text-[10px]">الإعلانات</span>
+          </button>
+          <button onclick="navigate('my_applications')" class="flex flex-col items-center gap-0.5 relative text-slate-400 hover:text-slate-200">
+            <i class="fa-solid fa-list-check text-sm"></i>
+            <span class="text-[10px]">طلباتي</span>
+            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+          </button>
+          <button onclick="navigate('profile')" class="flex flex-col items-center gap-0.5 text-slate-400 hover:text-slate-200">
+            <i class="fa-solid fa-user text-sm"></i>
+            <span class="text-[10px]">حسابي</span>
+          </button>
+        </nav>
+<!-- Home Indicator Bar -->
+<div class="w-full h-4.5 flex items-center justify-center bg-[#070f1e] shrink-0">
+<div class="w-32 h-1 bg-slate-600/80 rounded-full cursor-pointer hover:bg-slate-400 transition" onclick="navigate('home')"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Hint Float -->
+<div class="mt-3 flex items-center gap-2 text-xs text-slate-400 bg-slate-900/80 px-4 py-1.5 rounded-full border border-slate-800">
+<i class="fa-solid fa-hand-pointer text-cyan-400 text-xs"></i>
+<span class="">المحاكي تفاعلي بالكامل: يمكنك النقر على الشواغر، إرسال رسائل محادثة، إجراء الدفع بجيب، وتقديم الطلبات.</span>
+</div>
+</section>
+</main>
+<!-- ==================== DEVELOPER API & DB SCHEMA MODAL ==================== -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4" id="api-modal">
+<div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+<!-- Modal Header -->
+<div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-database text-cyan-400"></i>
+<h3 class="text-sm font-bold text-white">مخطط قاعدة البيانات ومسارات الـ REST API (وظائف إب)</h3>
+</div>
+<button class="w-7 h-7 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center text-xs" onclick="toggleModal('api-modal')">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-4 overflow-y-auto custom-scroll space-y-4 text-xs font-mono">
+<div>
+<span class="text-cyan-400 font-bold block mb-1"># قاعدة البيانات (PostgreSQL / Supabase Schema):</span>
+<pre class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300 overflow-x-auto text-[11px] leading-relaxed">-- 1. جدول الوظائف الشاغرة
+CREATE TABLE jobs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  employer_id UUID REFERENCES employers(id),
+  title VARCHAR(255) NOT NULL,
+  category VARCHAR(100), -- 'صحة وصيدلة', 'إدارة ومحاسبة', 'تقنية'
+  city VARCHAR(50) DEFAULT 'إب',
+  district VARCHAR(100), -- 'الدائري', 'شارع العدين', 'جبلة'
+  salary_yer NUMERIC(12, 2), -- مثل 250,000 ريال يمني
+  housing_provided BOOLEAN DEFAULT false,
+  is_urgent BOOLEAN DEFAULT false,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 2. جدول المدفوعات بمحفظة جيب
+CREATE TABLE payments (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,
+  wallet_type VARCHAR(50) DEFAULT 'jaib_wallet',
+  jaib_account_target VARCHAR(20) DEFAULT '770088836',
+  amount_yer NUMERIC(12,2) NOT NULL,
+  tx_reference VARCHAR(100) UNIQUE,
+  status VARCHAR(20) DEFAULT 'pending' -- 'verified', 'approved'
+);</pre>
+</div>
+<div>
+<span class="text-emerald-400 font-bold block mb-1"># المسارات البرمجية المتاحة (RESTful Endpoints):</span>
+<div class="space-y-1.5 text-[11px]">
+<div class="bg-slate-950 p-2 rounded-lg border border-slate-800 flex items-center justify-between">
+<span class="text-blue-400 font-bold">GET /api/v1/jobs?governorate=ibb&amp;urgent=true</span>
+<span class="text-slate-400">جلب شواغر محافظة إب العاجلة</span>
+</div>
+<div class="bg-slate-950 p-2 rounded-lg border border-slate-800 flex items-center justify-between">
+<span class="text-emerald-400 font-bold">POST /api/v1/payments/jaib/verify</span>
+<span class="text-slate-400">تأكيد تحويل محفظة جيب 770088836</span>
+</div>
+<div class="bg-slate-950 p-2 rounded-lg border border-slate-800 flex items-center justify-between">
+<span class="text-amber-400 font-bold">POST /api/v1/applications/apply-fast</span>
+<span class="text-slate-400">تقديم سريع مع مطابقة الذكاء الاصطناعي</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-3 bg-slate-950 border-t border-slate-800 flex justify-end">
+<button class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition" onclick="toggleModal('api-modal')">
+          إغلاق النافذة
+        </button>
+</div>
+</div>
+</div>
+<!-- ==================== JAVASCRIPT EMULATION ENGINE ==================== -->
+<script>
+    // App Global State
+    let currentRole = 'seeker'; // 'seeker' | 'employer'
+    let currentScreen = 'home';
+    let isDeviceFramed = true;
+    let hasApplied = false;
+    let verifiedPaymentTx = null;
+
+    // Chat Message Log
+    let chatMessages = [
+      { sender: 'candidate', text: 'أهلاً بكم إدارة مستشفى النور، يسعدني التقدم لشغل شاغر الصيدلي المتفرغ، ومرفق لكم ملف السيرة الذاتية وترخيص المزاولة الساري.', time: '10:15 ص' },
+      { sender: 'invitation', title: 'دعوة رسمية لمقابلة عمل', timeSlot: 'الخميس، الساعة 10:30 صباحاً', location: 'إدارة مستشفى النور - إب، الدائري الغربي', time: '10:20 ص' },
+      { sender: 'candidate', text: 'أشكركم جزيل الشكر، أؤكد لكم حضوري في الموعد المحدد بإذن الله تعالى. 🤝', time: '10:26 ص' }
+    ];
+
+    // Realtime Clock
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const clockEl = document.getElementById('phone-clock');
+      if (clockEl) clockEl.textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Toggle Modal
+    function toggleModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.toggle('hidden');
+        modal.classList.toggle('flex');
+      }
+    }
+
+    // Device Skin Switcher
+    function setDeviceSkin(skin) {
+      const chassis = document.getElementById('phone-chassis');
+      const titaniumBtn = document.getElementById('skin-titanium-btn');
+      const minimalBtn = document.getElementById('skin-minimal-btn');
+
+      if (skin === 'minimal') {
+        chassis.className = "w-[390px] h-[812px] bg-[#070f1e] rounded-3xl p-1 shadow-2xl relative flex flex-col overflow-hidden transition-all duration-300 border border-slate-700";
+        minimalBtn.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition";
+        titaniumBtn.className = "px-2.5 py-0.5 rounded-full text-[11px] text-slate-400 hover:text-white transition";
+      } else {
+        chassis.className = "w-[392px] h-[818px] bg-[#111827] rounded-[54px] p-[11px] titanium-frame relative flex flex-col overflow-hidden transition-all duration-300";
+        titaniumBtn.className = "px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 transition";
+        minimalBtn.className = "px-2.5 py-0.5 rounded-full text-[11px] text-slate-400 hover:text-white transition";
+      }
+    }
+
+    // Role Switcher
+    function switchRole(role) {
+      currentRole = role;
+      const seekerBtn = document.getElementById('mode-seeker-btn');
+      const employerBtn = document.getElementById('mode-employer-btn');
+      const roleBadge = document.getElementById('role-badge');
+      
+      if (role === 'seeker') {
+        seekerBtn.className = "flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-600/30";
+        employerBtn.className = "flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all duration-200";
+        roleBadge.textContent = "SEEKER_FLOW";
+        roleBadge.className = "text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded-md border border-cyan-800/40 font-mono";
+        navigate('home');
+      } else {
+        employerBtn.className = "flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-600/30";
+        seekerBtn.className = "flex items-center gap-2 px-5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all duration-200";
+        roleBadge.textContent = "EMPLOYER_FLOW";
+        roleBadge.className = "text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-md border border-blue-800/40 font-mono";
+        navigate('employer_dashboard');
+      }
+    }
+
+    // Toast Notice Inside Emulator
+    function showMiniToast(msg) {
+      const toast = document.getElementById('mini-toast');
+      toast.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3');
+      }, 3000);
+    }
+
+    // Push Notification Toast
+    function triggerNotificationModal() {
+      const toast = document.getElementById('in-app-toast');
+      toast.classList.remove('-translate-y-40', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('-translate-y-40', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 5500);
+    }
+
+    function handleNotificationClick() {
+      const toast = document.getElementById('in-app-toast');
+      toast.classList.add('-translate-y-40', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      navigate('employer_chat');
+    }
+
+    // Clipboard Copy Helper
+    function copyToClipboard(text, customMessage) {
+      navigator.clipboard.writeText(text).then(() => {
+        showMiniToast(customMessage || `تم نسخ: ${text}`);
+      }).catch(() => {
+        showMiniToast(`تم نسخ: ${text}`);
+      });
+    }
+
+    // Reset Simulation
+    function resetApp() {
+      hasApplied = false;
+      verifiedPaymentTx = null;
+      currentRole = 'seeker';
+      switchRole('seeker');
+      showMiniToast('تمت إعادة تعيين المحاكي بنجاح');
+    }
+
+    // Main Router
+    function navigate(screenId) {
+      currentScreen = screenId;
+      
+      // Update Sidebar styling
+      document.querySelectorAll('aside button[id^="nav-btn-"]').forEach(btn => {
+        btn.classList.remove('bg-cyan-500/15', 'text-cyan-300', 'border', 'border-cyan-500/30');
+        btn.classList.add('text-slate-300');
+      });
+      const activeNav = document.getElementById(`nav-btn-${screenId}`);
+      if (activeNav) {
+        activeNav.classList.remove('text-slate-300');
+        activeNav.classList.add('bg-cyan-500/15', 'text-cyan-300', 'border', 'border-cyan-500/30');
+      }
+
+      renderCurrentScreen();
+      renderBottomNavigation();
+    }
+
+    // Chat Interactive Message Send
+    function sendChatMessage() {
+      const input = document.getElementById('chat-text-input');
+      if (!input || !input.value.trim()) return;
+
+      const userText = input.value.trim();
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      const currentTime = `${hours}:${minutes}`;
+
+      // Append user msg
+      chatMessages.push({
+        sender: 'employer',
+        text: userText,
+        time: currentTime
+      });
+
+      input.value = '';
+      renderChatMessagesStream();
+
+      // Simulated candidate reply
+      setTimeout(() => {
+        chatMessages.push({
+          sender: 'candidate',
+          text: 'تم الاستلام بوضوح، شاكر ومقدر حسن اهتمامكم وتواصلكم الراقي!',
+          time: currentTime
+        });
+        renderChatMessagesStream();
+      }, 1200);
+    }
+
+    function renderChatMessagesStream() {
+      const container = document.getElementById('chat-stream-box');
+      if (!container) return;
+
+      container.innerHTML = chatMessages.map(msg => {
+        if (msg.sender === 'invitation') {
+          return `
+            <div class="p-3 bg-gradient-to-br from-blue-950 to-slate-900 border border-cyan-500/50 rounded-2xl space-y-2 shadow-lg my-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-white flex items-center gap-1.5">
+                  <i class="fa-solid fa-calendar-check text-cyan-400"></i> ${msg.title}
+                </span>
+                <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold">مؤكدة رسمي</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-950/70 text-[11px] space-y-1 text-slate-300 border border-slate-800">
+                <div><span class="text-slate-400">الموعد:</span> <strong class="text-white">${msg.timeSlot}</strong></div>
+                <div><span class="text-slate-400">المكان:</span> <span class="text-cyan-300">${msg.location}</span></div>
+              </div>
+            </div>
+          `;
+        }
+
+        const isMe = msg.sender === 'employer';
+        return `
+          <div class="flex items-end gap-2 ${isMe ? 'justify-start' : 'justify-end'}">
+            <div class="${isMe ? 'bg-cyan-600 text-white rounded-bl-none' : 'bg-slate-800 text-slate-200 rounded-br-none'} p-2.5 rounded-2xl text-xs max-w-[82%] shadow-sm">
+              <p class="leading-relaxed">${msg.text}</p>
+              <span class="text-[9px] ${isMe ? 'text-cyan-100' : 'text-slate-400'} block text-left mt-1 font-mono">${msg.time}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // --- SCREEN TEMPLATES RENDERER ---
+    function renderCurrentScreen() {
+      const viewport = document.getElementById('app-viewport');
+      viewport.className = "flex-1 overflow-y-auto no-scrollbar relative bg-[#070f1e] text-slate-100 flex flex-col screen-in";
+
+      switch (currentScreen) {
+        
+        // 1. HOME SCREEN (Job Seeker Feed)
+        case 'home':
+          viewport.innerHTML = `
+            <!-- Top App Bar -->
+            <div class="p-4 bg-gradient-to-b from-[#0e1d38] to-[#070f1e] border-b border-slate-800/80 sticky top-0 z-20 backdrop-blur-md">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs border border-cyan-500/30">
+                    إب
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-slate-400 block leading-tight">الموقع المحدد</span>
+                    <span class="text-xs font-bold text-white flex items-center gap-1">
+                      محافظة إب، اليمن <i class="fa-solid fa-angle-down text-[10px] text-cyan-400"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="navigate('vip_upgrade')" class="px-2.5 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-400 text-[11px] font-bold flex items-center gap-1 shadow-sm">
+                    <i class="fa-solid fa-crown text-[10px]"></i> VIP
+                  </button>
+                  <button onclick="triggerNotificationModal()" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center relative border border-slate-700/60">
+                    <i class="fa-regular fa-bell text-xs"></i>
+                    <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Search Bar with Live Filter Input -->
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                <input type="text" placeholder="ابحث عن وظيفة، صيدلي، محاسب، أو شركة في إب..." class="w-full bg-slate-900/90 text-white placeholder-slate-400 text-xs rounded-xl py-2.5 pr-9 pl-10 border border-slate-700 focus:outline-none focus:border-cyan-500 transition shadow-inner">
+                <button class="absolute left-2.5 top-2 p-1 text-slate-400 hover:text-cyan-400">
+                  <i class="fa-solid fa-sliders text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-4 space-y-4">
+              
+              <!-- Sector Filter Chips -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-slate-200">القطاعات الأكثر طلباً بإب</span>
+                  <span class="text-[11px] text-cyan-400 font-medium cursor-pointer">عرض الكل</span>
+                </div>
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                  <button class="px-3 py-1.5 rounded-xl bg-cyan-600 text-white text-[11px] font-bold shrink-0 shadow-md">الكل (120+)</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">🏥 صحة وصيدلة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">💼 إدارة ومحاسبة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">💻 تقنية وهندسة</button>
+                  <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 text-[11px] font-medium shrink-0 border border-slate-800 hover:border-slate-700">🛍️ تسويق ومبيعات</button>
+                </div>
+              </div>
+
+              <!-- Official Jaib Wallet Promo Card -->
+              <div onclick="navigate('payment_jaib')" class="p-3.5 rounded-2xl bg-gradient-to-r from-teal-950/80 via-slate-900 to-cyan-950/80 border border-emerald-500/40 flex items-center justify-between cursor-pointer hover:border-emerald-400 transition shadow-lg group">
+                <div class="space-y-1">
+                  <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60 font-mono">شريك الدفع المعتمد</span>
+                  <h4 class="text-xs font-bold text-white group-hover:text-cyan-300 transition">ترقية إعلاناتك عبر محفظة جيب</h4>
+                  <p class="text-[10px] text-slate-300">حساب المنصة: <span class="font-mono text-emerald-300 font-bold">770088836</span></p>
+                </div>
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-black text-sm shrink-0 border border-emerald-500/40 shadow-inner">
+                  جيب
+                </div>
+              </div>
+
+              <!-- Urgent Vacancies List -->
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-200">أحدث الشواغر الشاغرة (محافظة إب)</span>
+                  <span class="text-[10px] text-slate-400">12 شاغر اليوم</span>
+                </div>
+
+                <!-- Job Card 1: Pharmacist -->
+                <div onclick="navigate('job_detail')" class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition active:scale-[0.99] space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-blue-950 border border-blue-800 text-cyan-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-hospital"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                          صيدلي قانوني متفرغ
+                          <span class="text-[9px] bg-emerald-950 text-emerald-400 px-1.5 py-0.5 rounded font-semibold border border-emerald-800/40">شاغر عاجل</span>
+                        </h3>
+                        <p class="text-[11px] text-slate-400">مستشفى النور التخصصي • إب - الدائري الغربي</p>
+                      </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-amber-400 text-xs"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-clock text-cyan-400 ml-1"></i>دوام كامل</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold"><i class="fa-solid fa-coins text-amber-400 ml-1"></i>250,000 ريال يمني</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-house-medical text-cyan-400 ml-1"></i>سكن موفر</span>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800/70 text-[10px]">
+                    <span class="text-slate-400">نُشر قبل ساعتين • 14 متقدم</span>
+                    <span class="text-cyan-400 font-bold flex items-center gap-1">عرض التفاصيل والتقديم <i class="fa-solid fa-arrow-left text-[9px]"></i></span>
+                  </div>
+                </div>
+
+                <!-- Job Card 2: Accountant -->
+                <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-800 text-indigo-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-calculator"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white">محاسب عام ومسؤول مخازن</h3>
+                        <p class="text-[11px] text-slate-400">مجموعة السعيد التجارية • إب - شارع العدين</p>
+                      </div>
+                    </div>
+                    <button class="text-slate-400 hover:text-amber-400 text-xs"><i class="fa-regular fa-bookmark"></i></button>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800">دوام صباحي</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold">200,000 ريال يمني</span>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800/70 text-[10px]">
+                    <span class="text-slate-400">نُشر قبل 4 ساعات</span>
+                    <span class="text-cyan-400 font-semibold">تفاصيل الشاغر</span>
+                  </div>
+                </div>
+
+                <!-- Job Card 3: IT -->
+                <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition space-y-2.5 shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center gap-2.5">
+                      <div class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-800 text-cyan-400 flex items-center justify-center text-sm font-bold shadow-sm">
+                        <i class="fa-solid fa-server"></i>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-white">مهندس شبكات وسيرفرات</h3>
+                        <p class="text-[11px] text-slate-400">مجمع النجوم الطبي • إب - مفرق جبلة</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800">دوام كامل</span>
+                    <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800 text-emerald-300 font-bold">300,000 ريال يمني</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          `;
+          break;
+
+        // 2. JOB DETAILS & APPLICATION
+        case 'job_detail':
+          viewport.innerHTML = `
+            <!-- Top App Bar -->
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">تفاصيل الفرصة الوظيفية</h2>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyToClipboard(window.location.href, 'تم نسخ رابط الوظيفة بنجاح!')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center"><i class="fa-regular fa-share-from-square text-xs"></i></button>
+                <button class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center"><i class="fa-regular fa-bookmark text-xs"></i></button>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4 space-y-4">
+              <!-- Title Card -->
+              <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-850 to-slate-900 border border-slate-800 text-center space-y-2 shadow-lg">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-600 to-blue-700 mx-auto flex items-center justify-center text-white text-xl shadow-lg shadow-cyan-600/30">
+                  <i class="fa-solid fa-prescription-bottle-medical"></i>
+                </div>
+                <div>
+                  <h1 class="text-sm font-black text-white">صيدلي قانوني - مسؤول صيدلية المستشفى</h1>
+                  <p class="text-xs text-cyan-400 font-semibold">مستشفى النور التخصصي (منشأة طبية موثقة ✅)</p>
+                  <p class="text-[11px] text-slate-400"><i class="fa-solid fa-location-dot text-red-400 ml-1"></i>محافظة إب - شارع الدائري الغربي</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-800 text-center">
+                  <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-400 block">الراتب</span>
+                    <span class="text-xs font-bold text-emerald-400">250,000 ريال</span>
+                  </div>
+                  <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-400 block">نوع الدوام</span>
+                    <span class="text-xs font-bold text-white">متفرغ كامل</span>
+                  </div>
+                  <div class="bg-slate-950/80 p-2 rounded-xl border border-slate-800">
+                    <span class="text-[9px] text-slate-400 block">الخبرة</span>
+                    <span class="text-xs font-bold text-cyan-400">سنتان فأكثر</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Requirements -->
+              <div class="space-y-3">
+                <div class="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                  <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-xs"></i> الشروط والمتطلبات:
+                  </h3>
+                  <ul class="text-[11px] text-slate-300 space-y-1.5 list-disc list-inside leading-relaxed">
+                    <li>حاصل على بكالوريوس صيدلة من جامعة معتمدة (جامعة إب أو ما يعادلها).</li>
+                    <li>ترخيص مزاولة مهنة ساري المفعول صادر من وزارة الصحة.</li>
+                    <li>إجادة التعامل مع الأنظمة الصيدلانية وبرامج المخزون الطبي.</li>
+                    <li>القدرة على العمل بنظام النوبات وسرعة التعامل مع الحالات الحرجة.</li>
+                  </ul>
+                </div>
+
+                <div class="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                  <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-gift text-amber-400 text-xs"></i> المزايا والبدلات الموفرة:
+                  </h3>
+                  <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-300">
+                    <span class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-bed text-cyan-400"></i> سكن موفر للأطباء</span>
+                    <span class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-emerald-400"></i> تأمين طبي شامل</span>
+                    <span class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-utensils text-amber-400"></i> وجبات أثناء النوبة</span>
+                    <span class="bg-slate-950 p-2 rounded-xl border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-award text-purple-400"></i> حوافز أداء دورية</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Apply Button -->
+              <div class="pt-2">
+                ${hasApplied ? `
+                  <div class="p-3.5 bg-emerald-950/70 border border-emerald-500/50 rounded-2xl text-center space-y-2 shadow-lg">
+                    <div class="text-emerald-400 font-bold text-xs flex items-center justify-center gap-1.5">
+                      <i class="fa-solid fa-circle-check"></i> تم تقديم طلبك بنجاح ونسبة تطابقك 96%!
+                    </div>
+                    <p class="text-[11px] text-slate-300">أُرسل إشعار لإدارة مستشفى النور وستتلقى دعوة المقابلة هنا.</p>
+                    <button onclick="navigate('my_applications')" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">
+                      تتبع حالة الطلب في "طلباتي"
+                    </button>
+                  </div>
+                ` : `
+                  <button onclick="applyJobAction()" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-2xl font-bold text-xs shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2 transition active:scale-98">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    تقديم فوري بالسيرة الذاتية (CV د. أحمد)
+                  </button>
+                `}
+              </div>
+            </div>
+          `;
+          break;
+
+        // 3. PAYMENT SCREEN (Jaib Wallet 770088836)
+        case 'payment_jaib':
+          viewport.innerHTML = `
+            <!-- Top App Bar -->
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">إتمام الدفع الإلكتروني والترقية</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <!-- Payment Content -->
+            <div class="p-4 space-y-4">
+              <!-- Selected Plan Banner -->
+              <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-slate-400 block">الباقة المختارة</span>
+                  <span class="text-xs font-bold text-white">تثبيت إعلان وظيفي مميز (أسبوعين)</span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-extrabold text-amber-400">15,000 ريال يمني</span>
+                  <span class="text-[9px] text-slate-400 block">شامل التوثيق الرسمي</span>
+                </div>
+              </div>
+
+              <!-- Official Jaib Wallet Box -->
+              <div class="p-4 rounded-2xl bg-gradient-to-br from-teal-950 via-slate-900 to-cyan-950 border-2 border-emerald-500/70 shadow-xl space-y-3 relative overflow-hidden">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500 text-slate-950 font-black flex items-center justify-center text-sm shadow">
+                      جيب
+                    </div>
+                    <div>
+                      <h3 class="text-xs font-bold text-white">محفظة جيب - Jaib</h3>
+                      <p class="text-[10px] text-emerald-300">شركة عهد المالية (اليمن)</p>
+                    </div>
+                  </div>
+                  <span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full font-bold border border-emerald-500/40">الحساب الرسمي للمنصة</span>
+                </div>
+
+                <!-- Account Box with Quick Copy -->
+                <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/40 flex items-center justify-between">
+                  <div>
+                    <span class="text-[9px] text-slate-400 block">رقم حساب محفظة جيب الرسمي:</span>
+                    <span class="text-sm font-mono font-black text-emerald-300 tracking-wider">770088836</span>
+                  </div>
+                  <button onclick="copyToClipboard('770088836', 'تم نسخ رقم محفظة جيب 770088836 بنجاح!')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-[11px] font-bold flex items-center gap-1.5 transition active:scale-95 shadow">
+                    <i class="fa-regular fa-copy"></i> نسخ الرقم
+                  </button>
+                </div>
+
+                <p class="text-[10px] text-slate-300 leading-relaxed">
+                  <i class="fa-solid fa-circle-info text-cyan-400 ml-1"></i>
+                  قم بالتحويل عبر تطبيق محفظة جيب إلى الحساب <strong class="text-emerald-300">770088836</strong> ثم أدخل رقم العملية أدناه للتحقق الفوري.
+                </p>
+              </div>
+
+              <!-- Other Yemeni Payment Options -->
+              <div class="space-y-1.5">
+                <span class="text-[11px] font-bold text-slate-300">بوابات دفع محلية متوفرة:</span>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="p-2 bg-slate-900 border border-slate-800 rounded-xl text-center cursor-pointer hover:border-slate-600 transition">
+                    <div class="text-xs font-bold text-emerald-400">الكريمي</div>
+                    <span class="text-[9px] text-slate-400">حساب جوالي</span>
+                  </div>
+                  <div class="p-2 bg-slate-900 border border-slate-800 rounded-xl text-center cursor-pointer hover:border-slate-600 transition">
+                    <div class="text-xs font-bold text-amber-400">فلوسك</div>
+                    <span class="text-[9px] text-slate-400">بنك اليمن والكويت</span>
+                  </div>
+                  <div class="p-2 bg-slate-900 border border-slate-800 rounded-xl text-center cursor-pointer hover:border-slate-600 transition">
+                    <div class="text-xs font-bold text-purple-400">ون كاش</div>
+                    <span class="text-[9px] text-slate-400">محفظة إلكترونية</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Transaction Reference Input -->
+              <div class="space-y-1.5">
+                <label class="text-[11px] font-medium text-slate-300 block">رقم عملية التحويل (رقم المرجع):</label>
+                <div class="flex gap-2">
+                  <input id="tx-input" type="text" placeholder="مثال: 984572013" class="flex-1 bg-slate-900 text-white placeholder-slate-500 text-xs rounded-xl p-2.5 border border-slate-700 focus:outline-none focus:border-cyan-500 font-mono">
+                  <button onclick="fillSampleTx()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-[10px] font-mono shrink-0">تعبئة تجريبية</button>
+                </div>
+              </div>
+
+              <!-- Submit Payment Button -->
+              <button onclick="verifyPaymentSubmission()" class="w-full py-3 bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-2xl font-bold text-xs shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2 active:scale-98 transition">
+                <i class="fa-solid fa-shield-check"></i>
+                تأكيد العملية وتفعيل الإعلان فوراً
+              </button>
+            </div>
+          `;
+          break;
+
+        // 4. MY APPLICATIONS (Tracking Stages)
+        case 'my_applications':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">طلباتي - تتبع مراحل التوظيف</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <div class="flex items-center justify-between pb-1">
+                <span class="text-xs font-bold text-slate-200">الطلبات المسجلة</span>
+                <span class="text-[10px] bg-cyan-950 text-cyan-300 px-2 py-0.5 rounded-full border border-cyan-800/40">2 طلب نشط</span>
+              </div>
+
+              <!-- Active Application Card 1 -->
+              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 shadow-md">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="text-xs font-bold text-white">صيدلي قانوني متفرغ</h3>
+                    <p class="text-[11px] text-cyan-400">مستشفى النور التخصصي - إب</p>
+                  </div>
+                  <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded-full font-bold border border-emerald-800/50">تمت الدعوة لمقابلة ✅</span>
+                </div>
+
+                <!-- Stages Timeline -->
+                <div class="space-y-2 pt-1 border-t border-slate-800/60">
+                  <div class="flex items-center gap-2 text-[10px]">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+                    <span class="text-slate-300">تم إرسال الطلب والسيرة الذاتية</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[10px]">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+                    <span class="text-slate-300">مطابقة الذكاء الاصطناعي (نسبة التوافق 96%)</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-[10px]">
+                    <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
+                    <span class="text-cyan-300 font-bold">موعد المقابلة: الخميس 10:30 صباحاً (مقر المستشفى)</span>
+                  </div>
+                </div>
+
+                <div class="pt-1 flex items-center gap-2">
+                  <button onclick="navigate('employer_chat')" class="flex-1 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-[11px] font-bold text-center flex items-center justify-center gap-1.5 transition">
+                    <i class="fa-solid fa-comments"></i> فتح المحادثة وتأكيد الحضور
+                  </button>
+                </div>
+              </div>
+
+              <!-- Application Card 2 -->
+              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2 opacity-80">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <h3 class="text-xs font-bold text-white">أخصائي مختبرات سريرية</h3>
+                    <p class="text-[11px] text-slate-400">مجمع الأمل الطبي - إب</p>
+                  </div>
+                  <span class="text-[10px] bg-blue-950 text-blue-300 px-2 py-0.5 rounded-full font-medium">قيد الفرز الأولي</span>
+                </div>
+                <p class="text-[10px] text-slate-400">تاريخ التقديم: 12 مايو 2024</p>
+              </div>
+            </div>
+          `;
+          break;
+
+        // 5. EMPLOYER DASHBOARD
+        case 'employer_dashboard':
+          viewport.innerHTML = `
+            <div class="p-4 bg-gradient-to-b from-[#0e1d38] to-[#070f1e] border-b border-slate-800/80 sticky top-0 z-20 backdrop-blur-md">
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-md">
+                    م.ن
+                  </div>
+                  <div>
+                    <h2 class="text-xs font-bold text-white">مستشفى النور التخصصي</h2>
+                    <span class="text-[10px] text-emerald-400 flex items-center gap-1 font-semibold">منشأة طبية معتمدة بإب ✅</span>
+                  </div>
+                </div>
+                <button onclick="navigate('post_job')" class="px-2.5 py-1 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold rounded-xl flex items-center gap-1 shadow">
+                  <i class="fa-solid fa-plus text-[10px]"></i> نشر شاغر
+                </button>
+              </div>
+
+              <!-- Live Metrics -->
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800">
+                  <span class="text-sm font-black text-cyan-400 block font-mono">4</span>
+                  <span class="text-[9px] text-slate-300">شواغر نشطة</span>
+                </div>
+                <div onclick="navigate('candidates_list')" class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-500 transition">
+                  <span class="text-sm font-black text-emerald-400 block font-mono">28</span>
+                  <span class="text-[9px] text-slate-300">متقدم جديد</span>
+                </div>
+                <div onclick="navigate('employer_chat')" class="bg-slate-900/90 p-2.5 rounded-xl border border-slate-800 cursor-pointer hover:border-cyan-500 transition">
+                  <span class="text-sm font-black text-amber-400 block font-mono">3</span>
+                  <span class="text-[9px] text-slate-300">مقابلات اليوم</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-4 space-y-4">
+              <!-- Interview Reminder Alert -->
+              <div onclick="navigate('employer_chat')" class="p-3 rounded-2xl bg-gradient-to-r from-blue-950/80 to-slate-900 border border-blue-500/40 flex items-center justify-between cursor-pointer hover:border-blue-400 transition shadow">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-calendar-check"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-white">مقابلة اليوم: د. أحمد الرعوي</h4>
+                    <span class="text-[10px] text-blue-300">صيدلي قانوني • الخميس 10:30 ص</span>
+                  </div>
+                </div>
+                <i class="fa-solid fa-arrow-left text-xs text-blue-400"></i>
+              </div>
+
+              <!-- Active Vacancies -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-slate-200">إدارة الشواغر المعلنة</span>
+                  <span onclick="navigate('candidates_list')" class="text-[11px] text-cyan-400 cursor-pointer hover:underline">فرز كافة المتقدمين</span>
+                </div>
+
+                <div class="p-3 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-white">صيدلي قانوني متفرغ</h4>
+                      <span class="text-[10px] text-slate-400">نُشر 10 مايو • 14 متقدم</span>
+                    </div>
+                    <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded font-bold">نشط</span>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px]">
+                    <button onclick="navigate('candidates_list')" class="text-cyan-400 font-bold flex items-center gap-1 hover:underline">
+                      <i class="fa-solid fa-users text-xs"></i> استعراض ومطابقة المرشحين (14)
+                    </button>
+                    <button onclick="copyToClipboard(window.location.href, 'تم نسخ رابط الشاغر')" class="text-slate-400 hover:text-white"><i class="fa-solid fa-share-nodes"></i> مشاركة</button>
+                  </div>
+                </div>
+
+                <div class="p-3 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h4 class="text-xs font-bold text-white">طبيب عام مقيم (طوارئ)</h4>
+                      <span class="text-[10px] text-slate-400">نُشر 8 مايو • 9 متقدمين</span>
+                    </div>
+                    <span class="text-[10px] bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded font-bold">نشط</span>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 border-t border-slate-800 text-[11px]">
+                    <button onclick="navigate('candidates_list')" class="text-cyan-400 font-bold flex items-center gap-1">
+                      <i class="fa-solid fa-users text-xs"></i> استعراض المتقدمين (9)
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+
+        // 6. CANDIDATES LIST (Smart AI Match)
+        case 'candidates_list':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('employer_dashboard')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">فرز المتقدمين (شاغر الصيدلي)</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <!-- Filter Buttons -->
+              <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-[11px]">
+                <button class="px-3 py-1.5 rounded-xl bg-cyan-600 text-white font-bold shrink-0">الأعلى تطابقاً (AI 96%)</button>
+                <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 shrink-0 border border-slate-800">مرشحو VIP ⭐</button>
+                <button class="px-3 py-1.5 rounded-xl bg-slate-900 text-slate-300 shrink-0 border border-slate-800">تراخيص موثقة</button>
+              </div>
+
+              <!-- Top Candidate: Dr. Ahmed -->
+              <div onclick="navigate('candidate_detail')" class="p-3.5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-850 to-slate-900 border-2 border-emerald-500/50 hover:border-emerald-400 cursor-pointer transition space-y-2.5 shadow-lg">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-11 h-11 rounded-full bg-slate-800 border-2 border-emerald-400 overflow-hidden flex items-center justify-center text-white font-bold text-base shadow">
+                      <i class="fa-solid fa-user-doctor text-cyan-300"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                        د. أحمد عبده الرعوي
+                        <span class="text-amber-400 text-xs">⭐ VIP</span>
+                      </h3>
+                      <p class="text-[11px] text-slate-400">بكالوريوس صيدلة • خبرة 3 سنوات</p>
+                    </div>
+                  </div>
+                  
+                  <!-- Match Pill -->
+                  <div class="text-center bg-emerald-950/90 border border-emerald-500/50 px-2 py-1 rounded-xl">
+                    <span class="text-xs font-black text-emerald-400 block font-mono">96%</span>
+                    <span class="text-[8px] text-emerald-300">توافق ذكي</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 text-[10px] text-slate-300">
+                  <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-certificate text-cyan-400 ml-1"></i>ترخيص مزاولة ساري</span>
+                  <span class="bg-slate-950 px-2 py-0.5 rounded-lg border border-slate-800"><i class="fa-solid fa-location-dot text-red-400 ml-1"></i>إب - جبلة</span>
+                </div>
+
+                <div class="flex items-center justify-between pt-1 border-t border-slate-800 text-[10px]">
+                  <span class="text-emerald-400 font-bold">موعد المقابلة محدد: الخميس 10:30 ص</span>
+                  <span class="text-cyan-400 font-semibold flex items-center gap-1">عرض الملف كاملاً <i class="fa-solid fa-chevron-left text-[8px]"></i></span>
+                </div>
+              </div>
+
+              <!-- Candidate 2 -->
+              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 cursor-pointer space-y-2">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white font-bold text-sm">
+                      <i class="fa-solid fa-user-nurse text-cyan-300"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-xs font-bold text-white">د. سارة المتوكل</h3>
+                      <p class="text-[11px] text-slate-400">دبلوم صيدلة سريرية • خبرة سنتان</p>
+                    </div>
+                  </div>
+                  <div class="text-center bg-blue-950/80 border border-blue-500/40 px-2 py-1 rounded-xl">
+                    <span class="text-xs font-black text-cyan-400 block font-mono">91%</span>
+                    <span class="text-[8px] text-cyan-300">توافق</span>
+                  </div>
+                </div>
+                <div class="text-[10px] text-slate-400">إب - شارع تعز</div>
+              </div>
+
+            </div>
+          `;
+          break;
+
+        // 7. CANDIDATE PROFILE DETAIL
+        case 'candidate_detail':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('candidates_list')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">ملف المرشح التوظيفي</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3.5">
+              <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-850 to-slate-900 border border-slate-800 text-center space-y-2 shadow-lg">
+                <div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-emerald-400 mx-auto flex items-center justify-center text-2xl text-cyan-400 shadow">
+                  <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div>
+                  <h3 class="text-sm font-bold text-white flex items-center justify-center gap-1.5">
+                    د. أحمد عبده الرعوي
+                    <span class="text-amber-400 text-xs">⭐ VIP</span>
+                  </h3>
+                  <p class="text-xs text-cyan-400 font-semibold">صيدلي قانوني متفرغ</p>
+                  <p class="text-[11px] text-slate-400">إب - خط جبلة الرئيسي</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-between text-xs">
+                  <span class="text-emerald-300 font-bold">نسبة التوافق مع شاغر الصيدلي:</span>
+                  <span class="text-emerald-400 font-black text-sm font-mono">96% تطابق ذكي</span>
+                </div>
+              </div>
+
+              <!-- Credentials -->
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-file-shield text-emerald-400 text-sm"></i>
+                  <span>ترخيص مزاولة معتمد</span>
+                </div>
+                <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-graduation-cap text-cyan-400 text-sm"></i>
+                  <span>بكالوريوس صيدلة (إب)</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="navigate('employer_chat')" class="py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow transition">
+                  <i class="fa-solid fa-comments"></i> فتح المحادثة
+                </button>
+                <button onclick="showMiniToast('جاري الاتصال بهاتف المرشح الموثق: 770xxxxxx')" class="py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow transition">
+                  <i class="fa-solid fa-phone"></i> اتصال مباشر
+                </button>
+              </div>
+            </div>
+          `;
+          break;
+
+        // 8. EMPLOYER CHAT SCREEN (Live Messaging)
+        case 'employer_chat':
+          viewport.innerHTML = `
+            <!-- Chat Header -->
+            <div class="p-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20">
+              <div class="flex items-center gap-2">
+                <button onclick="navigate('candidates_list')" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center">
+                  <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-cyan-300 text-xs font-bold border border-slate-700">
+                  أ.ر
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-white leading-tight">د. أحمد عبده الرعوي</h3>
+                  <span class="text-[9px] text-emerald-400 flex items-center gap-1">متصل الآن 🟢</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="showMiniToast('بدء مكالمة صوتية مشفرة')" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center text-xs hover:text-white"><i class="fa-solid fa-phone"></i></button>
+              </div>
+            </div>
+
+            <!-- Messages Stream -->
+            <div id="chat-stream-box" class="p-3 space-y-2.5 flex-1 overflow-y-auto no-scrollbar">
+              <!-- Rendered via renderChatMessagesStream() -->
+            </div>
+
+            <!-- Chat Input Bar -->
+            <div class="p-2 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
+              <button onclick="showMiniToast('إرفاق ملف أو عقد توظيف')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-400 flex items-center justify-center hover:text-white"><i class="fa-solid fa-paperclip text-xs"></i></button>
+              <input id="chat-text-input" onkeydown="if(event.key==='Enter') sendChatMessage()" type="text" placeholder="اكتب رداً للمرشح واضغط إرسال..." class="flex-1 bg-slate-800 text-white placeholder-slate-500 text-xs rounded-xl px-3 py-2 border border-slate-700 focus:outline-none focus:border-cyan-500">
+              <button onclick="sendChatMessage()" class="w-8 h-8 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white flex items-center justify-center transition active:scale-95 shadow"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+            </div>
+          `;
+          setTimeout(renderChatMessagesStream, 50);
+          break;
+
+        // 9. ADS & SERVICES DIRECTORY
+        case 'ads_directory':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">دليل الإعلانات والخدمات التجارية</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <div class="p-3 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <span class="text-[10px] text-cyan-400 font-bold uppercase">إعلانات محافظة إب</span>
+                <p class="text-xs text-white">تصفح الخدمات والأنشطة التجارية في مختلف مديريات المحافظة.</p>
+              </div>
+
+              <!-- Commercial Ad -->
+              <div class="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-xs font-bold text-white">مجمع السعيد للأنظمة المحاسبية</h3>
+                  <span class="text-[9px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded font-bold">إعلان مثبت</span>
+                </div>
+                <p class="text-[11px] text-slate-300">تركيب وتوريد برامج المحاسبة ونقاط البيع للمحلات والشركات بإب.</p>
+                <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800">
+                  <span>إب - شارع العدين</span>
+                  <button onclick="copyToClipboard('777123456', 'تم نسخ رقم الهاتف')" class="text-cyan-400 font-bold hover:underline">اتصال: 777123456</button>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+
+        // 10. POST JOB / AD
+        case 'post_job':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('employer_dashboard')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">نشر شاغر أو إعلان جديد بإب</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <div class="space-y-1">
+                <label class="text-[11px] font-medium text-slate-300">المسمى الوظيفي المطلوب:</label>
+                <input type="text" placeholder="مثال: محاسب تكاليف متفرغ" class="w-full bg-slate-900 text-white text-xs rounded-xl p-2.5 border border-slate-800 focus:outline-none focus:border-cyan-500">
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-[11px] font-medium text-slate-300">القطاع:</label>
+                <select class="w-full bg-slate-900 text-white text-xs rounded-xl p-2.5 border border-slate-800 focus:outline-none focus:border-cyan-500">
+                  <option>صحة وصيدلة</option>
+                  <option>إدارة ومحاسبة</option>
+                  <option>هندسة وتقنية معلومات</option>
+                  <option>مبيعات وتسويق</option>
+                </select>
+              </div>
+
+              <div class="space-y-1">
+                <label class="text-[11px] font-medium text-slate-300">الراتب المتوقع (ريال يمني):</label>
+                <input type="text" placeholder="مثال: 220,000" class="w-full bg-slate-900 text-white text-xs rounded-xl p-2.5 border border-slate-800 focus:outline-none focus:border-cyan-500 font-mono">
+              </div>
+
+              <button onclick="showMiniToast('تم نشر الشاغر بنجاح وجاهز للمشاركة فوراً!'); navigate('employer_dashboard');" class="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-2xl font-bold text-xs shadow-lg mt-3 transition active:scale-98">
+                <i class="fa-solid fa-paper-plane ml-1"></i> حفظ ونشر الشاغر فوراً
+              </button>
+            </div>
+          `;
+          break;
+
+        // 11. VIP UPGRADE
+        case 'vip_upgrade':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">ترقية العضوية الذهبية VIP</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3.5 text-center">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-600 mx-auto flex items-center justify-center text-white text-2xl shadow-lg shadow-amber-500/25">
+                <i class="fa-solid fa-crown"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white">كن في صدارة المرشحين لدى شركات إب</h3>
+                <p class="text-xs text-slate-400">تزيد العضوية الذهبية فرص توظيفك بنسبة 3 أضعاف</p>
+              </div>
+
+              <div class="p-3.5 bg-slate-900 rounded-2xl border border-amber-500/50 space-y-2 text-right shadow">
+                <div class="text-xs font-bold text-amber-400">باقة VIP الذهبية (شهر كامل)</div>
+                <div class="text-sm font-black text-white font-mono">10,000 ريال يمني</div>
+                <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                  <li>شارة المرشح الموثق الذهبي ⭐</li>
+                  <li>ظهور ملفك في قمة نتائج أصحاب العمل</li>
+                  <li>إشعار فوري عند فتح شواغر تناسبك</li>
+                </ul>
+              </div>
+
+              <button onclick="navigate('payment_jaib')" class="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-black rounded-2xl text-xs shadow-lg transition active:scale-98">
+                الدفع والترقية عبر محفظة جيب (770088836)
+              </button>
+            </div>
+          `;
+          break;
+
+        // 12. PROFILE
+        case 'profile':
+          viewport.innerHTML = `
+            <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0 z-20 backdrop-blur-md">
+              <button onclick="navigate('home')" class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:text-white">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+              <h2 class="text-xs font-bold text-white">الملف الشخصي والسيرة الذاتية</h2>
+              <div class="w-8"></div>
+            </div>
+
+            <div class="p-4 space-y-3.5 text-center">
+              <div class="w-16 h-16 rounded-full bg-slate-800 border-2 border-cyan-400 mx-auto flex items-center justify-center text-white text-2xl shadow">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-bold text-white">د. أحمد عبده الرعوي</h3>
+                <p class="text-xs text-cyan-400">صيدلي قانوني • إب، اليمن</p>
+                <p class="text-[11px] text-slate-400 font-mono">770088836</p>
+              </div>
+
+              <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 text-right space-y-2">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-bold text-white">السيرة الذاتية المرفقة (CV):</span>
+                  <span class="text-emerald-400 text-[10px] font-mono">مكتمل 95%</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between text-[11px]">
+                  <span class="text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-pdf text-red-400"></i> Ahmed_AlRaawi_CV.pdf</span>
+                  <button onclick="showMiniToast('تم تحديث ملف السيرة الذاتية بنجاح')" class="text-cyan-400 hover:underline">تحديث</button>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+
+        default:
+          navigate('home');
+      }
+    }
+
+    // Render Bottom Tab Bar
+    function renderBottomNavigation() {
+      const bar = document.getElementById('app-tab-bar');
+      
+      if (currentRole === 'seeker') {
+        bar.innerHTML = `
+          <button onclick="navigate('home')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'home' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-house text-sm"></i>
+            <span class="text-[10px]">الرئيسية</span>
+          </button>
+          <button onclick="navigate('ads_directory')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'ads_directory' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-rectangle-ad text-sm"></i>
+            <span class="text-[10px]">الإعلانات</span>
+          </button>
+          <button onclick="navigate('my_applications')" class="flex flex-col items-center gap-0.5 relative ${currentScreen === 'my_applications' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-list-check text-sm"></i>
+            <span class="text-[10px]">طلباتي</span>
+            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+          </button>
+          <button onclick="navigate('profile')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'profile' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-user text-sm"></i>
+            <span class="text-[10px]">حسابي</span>
+          </button>
+        `;
+      } else {
+        bar.innerHTML = `
+          <button onclick="navigate('employer_dashboard')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'employer_dashboard' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-chart-pie text-sm"></i>
+            <span class="text-[10px]">المنشأة</span>
+          </button>
+          <button onclick="navigate('candidates_list')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'candidates_list' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-users text-sm"></i>
+            <span class="text-[10px]">المتقدمين</span>
+          </button>
+          <button onclick="navigate('employer_chat')" class="flex flex-col items-center gap-0.5 relative ${currentScreen === 'employer_chat' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-comments text-sm"></i>
+            <span class="text-[10px]">الرسائل</span>
+            <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-cyan-400"></span>
+          </button>
+          <button onclick="navigate('post_job')" class="flex flex-col items-center gap-0.5 ${currentScreen === 'post_job' ? 'text-cyan-400 font-bold' : 'text-slate-400 hover:text-slate-200'}">
+            <i class="fa-solid fa-circle-plus text-sm"></i>
+            <span class="text-[10px]">نشر شاغر</span>
+          </button>
+        `;
+      }
+    }
+
+    // Interactive Action Handlers
+    function applyJobAction() {
+      hasApplied = true;
+      renderCurrentScreen();
+      showMiniToast('تم تقديم السيرة الذاتية بنجاح!');
+      setTimeout(() => {
+        triggerNotificationModal();
+      }, 1000);
+    }
+
+    function fillSampleTx() {
+      const input = document.getElementById('tx-input');
+      if (input) input.value = "JB-" + Math.floor(10000000 + Math.random() * 90000000);
+    }
+
+    function verifyPaymentSubmission() {
+      const input = document.getElementById('tx-input');
+      const val = input ? input.value : '';
+      if (!val) {
+        showMiniToast('يرجى كتابة رقم العملية أو النقر على "تعبئة تجريبية"');
+        return;
+      }
+      showMiniToast('تم التحقق بنجاح من حساب محفظة جيب 770088836 وتفعيل الخدمة!');
+      setTimeout(() => {
+        navigate('home');
+      }, 1200);
+    }
+
+    // Dynamic Standalone Source Code Exporter
+    function downloadEmulatorSource() {
+      const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Ibb_Jobs_Interactive_Emulator.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showMiniToast('تم تنزيل كود المحاكي بالكامل (HTML مستقل)');
+    }
+
+    // Initialize App
+    navigate('home');
+  </script>
+
+
+</body></html>

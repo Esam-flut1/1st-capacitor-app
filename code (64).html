@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;font-family:'Tajawal',sans-serif;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+    @keyframes shimmer {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .animate-shimmer::after {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      transform: translateX(100%);
+      background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 100%);
+      animation: shimmer 1.5s infinite;
+      content: '';
+    }
+  </style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-container": "#76849f",
+          "primary": "#0a192f",
+          "tertiary-container": "#001f27",
+          "secondary-container": "#708cfd",
+          "tertiary-fixed": "#b3ebff",
+          "on-tertiary-fixed-variant": "#004e5f",
+          "on-secondary-fixed": "#001453",
+          "tertiary": "#000000",
+          "tertiary-fixed-dim": "#4cd6fb",
+          "on-secondary-fixed-variant": "#173bab",
+          "on-tertiary": "#ffffff",
+          "surface-container": "#e5eeff",
+          "on-surface": "#0b1c30",
+          "on-primary-fixed-variant": "#39475f",
+          "on-primary-fixed": "#0d1c32",
+          "on-tertiary-fixed": "#001f27",
+          "surface-variant": "#d3e4fe",
+          "surface-container-highest": "#d3e4fe",
+          "on-error": "#ffffff",
+          "surface": "#f8f9ff",
+          "surface-dim": "#cbdbf5",
+          "on-primary": "#ffffff",
+          "primary-container": "#0f2342",
+          "background": "#f8f9ff",
+          "error-container": "#ffdad6",
+          "on-surface-variant": "#44474d",
+          "surface-container-lowest": "#ffffff",
+          "outline": "#75777e",
+          "on-tertiary-container": "#0090ad",
+          "on-secondary-container": "#00217a",
+          "primary-fixed": "#d6e3ff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#eaf1ff",
+          "surface-container-low": "#eff4ff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#b8c4ff",
+          "outline-variant": "#c5c6cd",
+          "surface-container-high": "#dce9ff",
+          "error": "#ba1a1a",
+          "primary-fixed-dim": "#b9c7e4",
+          "inverse-surface": "#213145",
+          "on-background": "#0b1c30",
+          "secondary": "#2563eb",
+          "inverse-primary": "#b9c7e4",
+          "secondary-fixed": "#dde1ff",
+          "surface-tint": "#1e40af",
+          "surface-bright": "#f8f9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter-mobile": "1rem",
+          "space-md": "1rem",
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "gutter": "1rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1rem",
+          "margin": "1rem",
+          "space-xl": "2.5rem",
+          "margin-desktop": "3rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Tajawal", "sans-serif"],
+          "headline-lg": ["Tajawal", "sans-serif"],
+          "display-lg-mobile": ["Tajawal", "sans-serif"],
+          "display-lg": ["Tajawal", "sans-serif"],
+          "headline-xl-mobile": ["Tajawal", "sans-serif"],
+          "label-sm": ["Tajawal", "sans-serif"],
+          "body-md": ["Tajawal", "sans-serif"],
+          "body-sm": ["Tajawal", "sans-serif"],
+          "label-md": ["Tajawal", "sans-serif"],
+          "headline-sm": ["Tajawal", "sans-serif"],
+          "label-lg": ["Tajawal", "sans-serif"],
+          "headline-xl": ["Tajawal", "sans-serif"],
+          "body-lg": ["Tajawal", "sans-serif"],
+          "title-md": ["Tajawal", "sans-serif"]
+        },
+        "fontSize": {
+          "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+          "headline-lg": ["24px", { "lineHeight": "34px", "fontWeight": "700" }],
+          "display-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "800" }],
+          "display-lg": ["48px", { "lineHeight": "56px", "fontWeight": "800" }],
+          "headline-xl-mobile": ["26px", { "lineHeight": "34px", "fontWeight": "700" }],
+          "label-sm": ["11px", { "lineHeight": "15px", "fontWeight": "700" }],
+          "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+          "body-sm": ["13px", { "lineHeight": "19px", "fontWeight": "400" }],
+          "label-md": ["12px", { "lineHeight": "18px", "fontWeight": "600" }],
+          "headline-sm": ["18px", { "lineHeight": "26px", "fontWeight": "700" }],
+          "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+          "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "700" }],
+          "headline-xl": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+          "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }]
+        }
+      }
+    }
+  }
+</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style></head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed font-['Tajawal'] relative overflow-x-hidden">
+<!-- 1. App Splash Screen Overlay -->
+<div class="fixed inset-0 z-[100] flex flex-col items-center justify-between bg-gradient-to-b from-[#061121] via-[#0a192f] to-[#04201c] text-white p-6 transition-all duration-700 select-none" id="appSplashScreen">
+<!-- Top subtle badge -->
+<div class="pt-safe flex items-center justify-between w-full opacity-80 text-xs">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/10 text-emerald-300 font-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+      محافظة إب • منصة التوظيف الرسمية
+    </span>
+<button class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors flex items-center gap-1" onclick="dismissSplash()">
+<span>تخطي</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- Center Logo & Branding -->
+<div class="flex flex-col items-center text-center my-auto px-4 max-w-sm">
+<div class="relative w-28 h-28 mb-5 flex items-center justify-center">
+<div class="absolute inset-0 rounded-3xl bg-emerald-500/20 blur-xl animate-pulse"></div>
+<img alt="شعار منصة وظائف إب" class="w-28 h-28 rounded-2xl object-cover shadow-2xl relative z-10 ring-2 ring-emerald-400/30 transform hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp5ZtW2VpNIiMwFWpzzdnxfmmfv49Kdtddy6Mpx7HAvRRqUqDQ0Ccw6muOQe0fbB7b30sCKHV-GQ-T5Q-GfZWY0dPhNQIrfghu92BgBIJG3ZNJlXfpri_vIPX5aXCeQlGY7XTWDMkU9OFT_dNtFIhwIG32S0VPXMDtmATqj-IQHl3h9nEGsroJXhNRuEZfK88wOTcHZ12We62tvcD441joHk5xfCTMv0X-TIW_OTn8ljBdF4qhdNDm8A"/>
+</div>
+<div class="inline-flex items-center gap-2 mb-1.5">
+<h1 class="text-3xl font-extrabold tracking-tight text-white drop-shadow-md">وظائف إب</h1>
+<span class="px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 text-xs font-bold">النسخة الحديثة</span>
+</div>
+<p class="text-xs uppercase tracking-widest text-slate-400 font-medium mb-3">Wazaef Ibb Portal</p>
+<div class="p-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+<p class="text-sm font-medium text-emerald-200 leading-relaxed">
+        بوابتك الأولى والموثوقة لفرص العمل والإعلانات في اللواء الأخضر 🌿
+      </p>
+</div>
+</div>
+<!-- Bottom Loader & Action -->
+<div class="pb-safe w-full flex flex-col items-center gap-3">
+<!-- Progress bar -->
+<div class="w-48 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full w-0 transition-all duration-300" id="splashProgress"></div>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-400">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>جاري مزامنة الشواغر المعلنة بإب...</span>
+</div>
+<button class="mt-2 w-full max-w-xs py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 active:scale-95 transition-all" onclick="dismissSplash()">
+      ابدأ الاستكشاف الآن
+    </button>
+</div>
+</div>
+<header class="fixed top-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-b border-surface-container shadow-[0_1px_8px_rgba(10,25,47,0.04)] pt-safe"><div class="h-20 px-gutter flex items-center justify-between"><div class="flex items-center gap-2.5"><div class="relative"><img alt="شعار منصة وظائف إب" class="w-11 h-11 rounded-xl object-cover ring-2 ring-emerald-500/30 shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp5ZtW2VpNIiMwFWpzzdnxfmmfv49Kdtddy6Mpx7HAvRRqUqDQ0Ccw6muOQe0fbB7b30sCKHV-GQ-T5Q-GfZWY0dPhNQIrfghu92BgBIJG3ZNJlXfpri_vIPX5aXCeQlGY7XTWDMkU9OFT_dNtFIhwIG32S0VPXMDtmATqj-IQHl3h9nEGsroJXhNRuEZfK88wOTcHZ12We62tvcD441joHk5xfCTMv0X-TIW_OTn8ljBdF4qhdNDm8A"/><span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-surface flex items-center justify-center"><span class="w-1.5 h-1.5 rounded-full bg-white"></span></span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">وظائف إب</span><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span></div><span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>سوق العمل والإعلانات - اللواء الأخضر</span></div></div><div class="flex items-center gap-space-xs"><button class="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-transform active:scale-90 text-primary border border-surface-container" onclick="triggerContentReload()" title="تحديث وتنشيط المحتوى"><span class="material-symbols-outlined text-[20px] text-secondary" id="refreshIcon">refresh</span></button><button class="w-9 h-9 flex items-center justify-center rounded-full bg-emerald-50 text-emerald-800 hover:bg-emerald-100 transition-colors border border-emerald-200 text-xs font-bold" onclick="showSplashAgain()" title="إعادة عرض شاشة الإقلاع"><span class="material-symbols-outlined text-[18px]">rocket_launch</span></button><button aria-label="التنبيهات" class="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-primary"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 left-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface"></span></button><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-secondary/30" src="https://lh3.googleusercontent.com/aida/AEtjO1WrbQ_6Y17bOMP_6R0qUUVBIpCLfytYwecobb3O152iJHnFAwo2pPe-Rpa-3lksOxpLSkXFTvOFAfyc4IYUM2vPQgJL_Dc7aXt1M9pFdJdoQO1o4Eq7Ozx1T5zMgTgO93-AAAfiNpgbRrhAfgNELrlbsXUzyg_6C581m-plJGipvpxmjmZmh8pIdrNb76pPg89OhgE_Wh8iY_luurJVZSe629D0TxBIdsMG6TdOR3Ivdr9OGKeisxtgg1Q"/></div></div></div><div class="px-gutter pb-space-xs flex items-center justify-between"><button class="inline-flex items-center gap-space-xs bg-surface-container-low hover:bg-surface-container py-1 px-3 rounded-full text-primary border border-surface-container transition-colors"><span class="material-symbols-outlined text-[16px] text-secondary">location_on</span><span class="font-label-md text-label-md">إب - جميع المديريات (22)</span><span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span></button><div class="flex items-center gap-1.5"><button class="font-label-sm text-label-sm text-secondary hover:underline flex items-center gap-1 font-semibold" onclick="triggerContentReload()"><span class="material-symbols-outlined text-[14px]">sync</span>تحديث المحتوى</button></div></div></header>
+<main class="flex flex-col relative w-full pt-20 pb-28 bg-surface min-h-screen">
+<div class="flex flex-col w-full pb-8">
+<!-- 2. Hero Welcome Banner & Green Ibb Landscape -->
+<section class="px-gutter pt-3 pb-1">
+<div class="relative w-full rounded-3xl overflow-hidden shadow-lg border border-emerald-900/10 min-h-[220px] flex flex-col justify-end p-4 text-white">
+<!-- Background Image with Gradient Overlay -->
+<img alt="طبيعة محافظة إب الخلابة - اللواء الأخضر" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVrLI2dDTvCT7VdDBqaTF1EMrTlDMyJpUR54-Ko-tcCm7lvrrf0C9C2M0yzDbS6ler5j29KSCGnX4ZZr4JlZkTS8rIMqO7Vt_5T_3-aWx99BOHmgfFJlC12buzbOVQNFhZ9noxmf95IfZlhbR-zujpiEj8scVW1-98Q3SfTZpbehcwfm8oaPd1FaF-ShFSAW0JgRWPQcy8wkxDrF9AwKRT-Fe8wgQUKcfDEAra1qaN4D9CBr4iw535EQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#051426] via-[#081a30]/75 to-black/35"></div>
+<div class="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-emerald-500/20 blur-3xl pointer-events-none"></div>
+<!-- Content inside Hero -->
+<div class="relative z-10 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/80 backdrop-blur-md text-white font-label-sm text-[12px] font-bold shadow-sm">
+<span>مرحباً بك في إب الخضراء 🌿</span>
+</span>
+<span class="flex items-center gap-1 text-[11px] text-emerald-200 bg-black/40 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          مباشر اليوم
+        </span>
+</div>
+<h1 class="text-xl font-extrabold text-white leading-tight drop-shadow-sm mt-1">
+        سوق العمل والفرص الأكبر في محافظة إب
+      </h1>
+<p class="text-xs text-slate-200 line-clamp-2 leading-relaxed">
+        اكتشف أحدث الوظائف اليومية، تواصل مباشرة مع المنشآت، أو ثبّت إعلانك التجاري بضغطة زر وبأسهل الطرق.
+      </p>
+<!-- Live Quick Stats Strip -->
+<div class="grid grid-cols-2 gap-2 mt-1">
+<div class="flex items-center gap-2 p-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/15">
+<span class="material-symbols-outlined text-emerald-400 text-[20px]">badge</span>
+<div class="flex flex-col">
+<span class="text-xs font-extrabold text-white leading-none">+1,240 فرصة</span>
+<span class="text-[10px] text-slate-300">وظائف شاغرة معتمدة</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/15">
+<span class="material-symbols-outlined text-blue-300 text-[20px]">map</span>
+<div class="flex flex-col">
+<span class="text-xs font-extrabold text-white leading-none">22 مديرية</span>
+<span class="text-[10px] text-slate-300">تغطية شاملة للمحافظة</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 mt-2 pt-1">
+<a class="flex-1 py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-md transition-all" href="#latestJobsSection">
+<span>استعرض الشواغر اليوم</span>
+<span class="material-symbols-outlined text-[15px]">arrow_downward</span>
+</a>
+<a class="py-2 px-3 rounded-xl bg-white/20 hover:bg-white/30 active:scale-95 backdrop-blur-md text-white font-bold text-xs flex items-center justify-center gap-1 border border-white/25 transition-all" href="#">
+<span class="material-symbols-outlined text-[15px] text-yellow-300">account_balance_wallet</span>
+<span>تثبيت إعلان عبر جيب</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SKELETON LOADER CONTAINER (Shown during refresh) -->
+<div class="hidden flex-col gap-4 px-gutter pt-3" id="skeletonLoaderContainer">
+<!-- Shimmer search & chips skeleton -->
+<div class="h-12 w-full rounded-xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<div class="flex gap-2 overflow-hidden">
+<div class="h-8 w-16 rounded-full bg-slate-200 dark:bg-slate-700 animate-shimmer shrink-0"></div>
+<div class="h-8 w-20 rounded-full bg-slate-200 dark:bg-slate-700 animate-shimmer shrink-0"></div>
+<div class="h-8 w-20 rounded-full bg-slate-200 dark:bg-slate-700 animate-shimmer shrink-0"></div>
+<div class="h-8 w-20 rounded-full bg-slate-200 dark:bg-slate-700 animate-shimmer shrink-0"></div>
+</div>
+<!-- Shimmer Ads Banner -->
+<div class="h-44 w-full rounded-2xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<!-- Shimmer Categories Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<div class="h-16 rounded-xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<div class="h-16 rounded-xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<div class="h-16 rounded-xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<div class="h-16 rounded-xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+</div>
+<!-- Shimmer Job Cards -->
+<div class="h-36 rounded-2xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+<div class="h-36 rounded-2xl bg-slate-200 dark:bg-slate-700 animate-shimmer"></div>
+</div>
+<!-- REAL MAIN CONTENT WRAPPER -->
+<div class="flex flex-col transition-opacity duration-300" id="realMainContent">
+<!-- Search & District Filter Module -->
+<section class="px-gutter pt-space-sm pb-space-sm flex flex-col gap-space-sm">
+<!-- Search Bar -->
+<div class="relative flex items-center w-full">
+<div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full pr-10 pl-11 py-3 bg-surface-container-lowest rounded-xl font-body-md text-body-md text-on-surface placeholder:text-outline shadow-sm border border-surface-container focus:border-secondary focus:outline-none focus:bg-surface-container-low transition-colors" placeholder="ابحث عن وظيفة، تخصص، أو جهة عمل..." type="search"/>
+<button aria-label="خيارات التصفية" class="absolute inset-y-0 left-2 my-auto w-8 h-8 rounded-lg flex items-center justify-center bg-surface-container hover:bg-surface-container-high text-primary transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<!-- Quick Location Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-1 -mx-gutter px-gutter">
+<button class="shrink-0 flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-[15px]">location_on</span>
+        الكل
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        الظهار
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        المشنة
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        جبلة
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        يريم
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        السدة
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        العدين
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        السحول
+      </button>
+<button class="shrink-0 px-3.5 py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container border border-surface-container text-on-surface-variant font-label-md text-label-md shadow-sm transition-all active:scale-95">
+        القاعدة
+      </button>
+</div>
+</section>
+<!-- Live Market Counter Pill -->
+<div class="px-gutter pt-1 pb-space-xs">
+<div class="flex items-center justify-between px-3.5 py-2 rounded-xl bg-surface-container-high border border-surface-variant text-on-surface">
+<div class="flex items-center gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+<span class="font-label-md text-label-md text-primary font-bold">+1,240 فرصة عمل وإعلان نشط</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">تحديث فوري لمدينة إب</span>
+</div>
+</div>
+<!-- Featured Commercial Ads Carousel -->
+<section class="mt-space-sm">
+<div class="flex items-center justify-between px-gutter mb-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<h2 class="font-title-md text-title-md text-primary">إعلانات تجارية مميزة</h2>
+</div>
+<a class="font-label-sm text-label-sm text-secondary hover:underline flex items-center" href="#">
+        عرض المزيد
+        <span class="material-symbols-outlined text-[14px] rotate-180">arrow_forward</span>
+</a>
+</div>
+<!-- Horizontal Ads Scroll -->
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-gutter py-1">
+<!-- Commercial Banner 1 -->
+<article class="shrink-0 w-[300px] rounded-2xl bg-gradient-to-l from-primary-container via-[#0d223f] to-primary text-on-primary p-4 shadow-md flex flex-col justify-between relative overflow-hidden group border border-blue-900/30">
+<div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-secondary/20 pointer-events-none"></div>
+<div class="flex items-start justify-between z-10 mb-2">
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm flex items-center gap-1 shadow-sm font-bold">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+            إعلان حصري
+          </span>
+<span class="font-label-sm text-label-sm text-slate-300">طوارئ 24 ساعة</span>
+</div>
+<div class="z-10 mt-1">
+<h3 class="font-title-md text-title-md font-bold leading-tight mb-1 text-white">مستشفى الكندي التخصصي - إب</h3>
+<p class="font-body-md text-body-md text-slate-300 line-clamp-2">افتتاح قسم الطوارئ المتطور والعيادات الاستشارية بأحدث التقنيات الطبية والكوادر المؤهلة.</p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 z-10 border-t border-white/10">
+<div class="flex items-center gap-1 text-slate-300 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-blue-300">location_on</span>
+<span>الظهار - خط المعاين</span>
+</div>
+<button class="px-3 py-1 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md flex items-center gap-1 shadow-sm hover:bg-secondary-fixed transition-colors font-bold">
+<span>تواصل</span>
+<span class="material-symbols-outlined text-[14px]">call</span>
+</button>
+</div>
+</article>
+<!-- Commercial Banner 2 -->
+<article class="shrink-0 w-[300px] rounded-2xl bg-surface-container-lowest text-on-surface p-4 shadow-md flex flex-col justify-between relative overflow-hidden group border border-surface-container">
+<div class="absolute -left-4 -top-4 w-20 h-20 rounded-full bg-secondary/10 pointer-events-none"></div>
+<div class="flex items-start justify-between z-10 mb-2">
+<span class="px-2.5 py-1 rounded-full bg-amber-500 text-white font-label-sm text-label-sm flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-[13px]">percent</span>
+            خصم 30%
+          </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">تسجيل محدود</span>
+</div>
+<div class="z-10 mt-1">
+<h3 class="font-title-md text-title-md font-bold text-primary leading-tight mb-1">أكاديمية الرواد للغات والكمبيوتر</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">دورات المحاسبة المتقدمة ونظم يمن سوفت ودبلوم الإنجليزية المكثف بمدربين معتمدين.</p>
+</div>
+<div class="flex items-center justify-between mt-3 pt-2.5 z-10 border-t border-surface-container">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">location_on</span>
+<span>الدائري الغربي - خلف الجامعة</span>
+</div>
+<button class="px-3 py-1 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center gap-1 shadow-sm hover:bg-primary transition-colors font-bold">
+<span>استفد الآن</span>
+<span class="material-symbols-outlined text-[14px]">school</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- Popular Fields / Category Grid -->
+<section class="mt-space-lg px-gutter">
+<div class="flex items-center justify-between mb-space-xs">
+<h2 class="font-title-md text-title-md text-primary">أبرز مجالات التوظيف</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">اختر مجالك</span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Sector 1 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">طب وصيدلة</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">42 شاغر</span>
+</div>
+</div>
+<!-- Sector 2 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">هندسة وتقنية</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">28 شاغر</span>
+</div>
+</div>
+<!-- Sector 3 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">محاسبة ومالية</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">35 شاغر</span>
+</div>
+</div>
+<!-- Sector 4 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">تسويق ومبيعات</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">64 شاغر</span>
+</div>
+</div>
+<!-- Sector 5 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">تدريس وتعليم</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">19 شاغر</span>
+</div>
+</div>
+<!-- Sector 6 -->
+<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-surface-container-lowest hover:bg-surface-container-low border border-surface-container shadow-sm transition-all cursor-pointer group">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">construction</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-primary font-bold truncate">حرف وخدمات</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">51 شاغر</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Job Listings Feed -->
+<section class="mt-space-lg px-gutter flex flex-col gap-3" id="latestJobsSection">
+<div class="flex items-center justify-between mb-1">
+<div>
+<h2 class="font-title-md text-title-md text-primary">أحدث فرص العمل اليوم</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">تم التدقيق والمطابقة مع أصحاب العمل</p>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg bg-surface-container text-primary hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+</button>
+</div>
+</div>
+<!-- Job Card 1 -->
+<article class="p-4 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex flex-col gap-3 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">prescriptions</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h3 class="font-title-md text-title-md font-bold text-primary truncate">صيدلي قانوني - مناوب مسائي</h3>
+</div>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant">
+<span class="font-body-md text-body-md truncate">صيدلية الشفاء الحديثة</span>
+<span class="material-symbols-outlined text-[15px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<button class="favorite-toggle p-2 rounded-full text-on-surface-variant hover:text-error hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Job Specs Tags -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container text-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+          إب - شارع العدين
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          دوام كامل
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+          منذ ساعتين
+        </span>
+</div>
+<!-- Salary & Quick Contact Row -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">الراتب المقترح:</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">350,000 - 450,000 ر.ي</span>
+</div>
+<div class="flex items-center gap-2">
+<a aria-label="واتساب" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95" href="https://wa.me/" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+            تقديم سريع
+          </button>
+</div>
+</div>
+</article>
+<!-- Job Card 2 -->
+<article class="p-4 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex flex-col gap-3 hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 left-0 bg-error-container text-on-error-container px-3 py-0.5 rounded-br-xl font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+        عاجل
+      </div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">calculate</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-primary truncate">محاسب مالي معتمد</h3>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant">
+<span class="font-body-md text-body-md truncate">شركة البركة للتجارة والاستيراد</span>
+<span class="material-symbols-outlined text-[15px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<button class="favorite-toggle p-2 rounded-full text-on-surface-variant hover:text-error hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Description pill -->
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+        مطلوب كادر ذو كفاءة عالية وخبرة عملية لا تقل عن سنتين على أنظمة يمن سوفت (المتكامل / أونكس برو) وإعداد القوائم الختامية.
+      </p>
+<!-- Tags -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container text-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+          إب - شارع تعز
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          دوام صباحي
+        </span>
+</div>
+<!-- Footer Action -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">الراتب:</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">مجزي يحدد بالمقابلة</span>
+</div>
+<div class="flex items-center gap-2">
+<a aria-label="واتساب" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95" href="https://wa.me/" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+            تقديم سريع
+          </button>
+</div>
+</div>
+</article>
+<!-- Job Card 3 -->
+<article class="p-4 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex flex-col gap-3 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">palette</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-primary truncate">مصمم جرافيك وسوشيال ميديا</h3>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant">
+<span class="font-body-md text-body-md truncate">مطاعم ومطابخ الضيافة الكبرى</span>
+</div>
+</div>
+</div>
+<button class="favorite-toggle p-2 rounded-full text-on-surface-variant hover:text-error hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container text-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+          إب - الدائري
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          دوام مرن / جزئي
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 font-label-sm text-label-sm">
+          يلزم بورتفوليو
+        </span>
+</div>
+<!-- Action -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">الراتب المتوقع:</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">250,000 ر.ي + حوافز</span>
+</div>
+<div class="flex items-center gap-2">
+<a aria-label="واتساب" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95" href="https://wa.me/" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+            تقديم سريع
+          </button>
+</div>
+</div>
+</article>
+<!-- Job Card 4 -->
+<article class="p-4 rounded-2xl bg-surface-container-lowest border border-surface-container shadow-sm flex flex-col gap-3 hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-start gap-3 min-w-0">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary shrink-0 shadow-inner">
+<span class="material-symbols-outlined text-[26px]">two_wheeler</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-title-md text-title-md font-bold text-primary truncate">مندوب مبيعات وتوزيع ميداني</h3>
+<div class="flex items-center gap-1 mt-0.5 text-on-surface-variant">
+<span class="font-body-md text-body-md truncate">وكالة الريان للمواد الغذائية</span>
+</div>
+</div>
+</div>
+<button class="favorite-toggle p-2 rounded-full text-on-surface-variant hover:text-error hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container text-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+          إب - منطقة ميتم
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          دوام كامل
+        </span>
+<span class="px-2.5 py-0.5 rounded-md bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          رخصة دراجة نارية
+        </span>
+</div>
+<!-- Action -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">الراتب والعمولة:</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">راتب ثابت + نسبة مجزية</span>
+</div>
+<div class="flex items-center gap-2">
+<a aria-label="واتساب" class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:opacity-90 shadow-sm transition-transform active:scale-95" href="https://wa.me/" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+            تقديم سريع
+          </button>
+</div>
+</div>
+</article>
+</section>
+</div> <!-- End of realMainContent -->
+<!-- Interactive script for micro-interactions & Skeleton & Splash -->
+<script>
+    // Splash screen logic
+    let splashTimeout;
+    function simulateSplashProgress() {
+      const progressBar = document.getElementById('splashProgress');
+      if (progressBar) {
+        progressBar.style.width = '0%';
+        setTimeout(() => { progressBar.style.width = '45%'; }, 300);
+        setTimeout(() => { progressBar.style.width = '80%'; }, 900);
+        setTimeout(() => { progressBar.style.width = '100%'; }, 1500);
+      }
+      splashTimeout = setTimeout(() => {
+        dismissSplash();
+      }, 2200);
+    }
+
+    function dismissSplash() {
+      clearTimeout(splashTimeout);
+      const splash = document.getElementById('appSplashScreen');
+      if (splash) {
+        splash.style.opacity = '0';
+        splash.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+          splash.style.display = 'none';
+        }, 600);
+      }
+    }
+
+    function showSplashAgain() {
+      const splash = document.getElementById('appSplashScreen');
+      if (splash) {
+        splash.style.display = 'flex';
+        setTimeout(() => {
+          splash.style.opacity = '1';
+          splash.style.transform = 'scale(1)';
+          simulateSplashProgress();
+        }, 50);
+      }
+    }
+
+    // Trigger Content Reload with Skeleton Shimmer Effect
+    function triggerContentReload() {
+      const icon = document.getElementById('refreshIcon');
+      if (icon) {
+        icon.classList.add('animate-spin');
+      }
+
+      const realContent = document.getElementById('realMainContent');
+      const skeleton = document.getElementById('skeletonLoaderContainer');
+
+      if (realContent && skeleton) {
+        realContent.classList.add('hidden');
+        skeleton.classList.remove('hidden');
+        skeleton.classList.add('flex');
+
+        setTimeout(() => {
+          skeleton.classList.add('hidden');
+          skeleton.classList.remove('flex');
+          realContent.classList.remove('hidden');
+          realContent.classList.add('animate-fadeIn');
+          if (icon) {
+            icon.classList.remove('animate-spin');
+          }
+        }, 1600);
+      }
+    }
+
+    // Init on load
+    window.addEventListener('DOMContentLoaded', () => {
+      simulateSplashProgress();
+    });
+
+    document.querySelectorAll('.favorite-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (icon.innerText === 'bookmark_border') {
+          icon.innerText = 'bookmark';
+          icon.style.fontVariationSettings = "'FILL' 1";
+          btn.classList.add('text-secondary');
+          btn.classList.remove('text-on-surface-variant');
+        } else {
+          icon.innerText = 'bookmark_border';
+          icon.style.fontVariationSettings = "'FILL' 0";
+          btn.classList.remove('text-secondary');
+          btn.classList.add('text-on-surface-variant');
+        }
+      });
+    });
+</script>
+</div></main>
+<nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl border-t border-surface-container shadow-[0_-4px_20px_rgba(10,25,47,0.06)]" data-active-classes="text-secondary font-bold"><div class="relative flex justify-around items-center h-16 px-space-xs max-w-lg mx-auto"><a aria-current="page" class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 transition-all text-secondary font-bold" data-path="main-feed" href="#"><span class="material-symbols-outlined text-[22px]">storefront</span><span class="font-label-sm text-label-sm">الرئيسية</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant hover:text-secondary transition-all" data-path="commercial-ads" href="#"><span class="material-symbols-outlined text-[22px]">campaign</span><span class="font-label-sm text-label-sm">الإعلانات</span></a><div class="relative -top-4 flex flex-col items-center"><a class="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-[#0f2d59] text-on-primary flex items-center justify-center shadow-[0_6px_16px_rgba(10,25,47,0.35)] ring-4 ring-surface hover:scale-105 active:scale-95 transition-transform duration-200" data-path="post-new-ad" href="#"><span class="material-symbols-outlined text-[30px] text-emerald-300">add</span></a><span class="font-label-sm text-label-sm text-primary font-bold mt-1">أضف إعلان</span></div><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant hover:text-secondary transition-all" data-path="my-requests-favorites" href="#"><span class="material-symbols-outlined text-[22px]">bookmark_border</span><span class="font-label-sm text-label-sm">طلباتي</span></a><a class="flex flex-col items-center justify-center gap-0.5 min-w-[56px] h-12 text-on-surface-variant hover:text-secondary transition-all" data-path="user-profile" href="#"><span class="material-symbols-outlined text-[22px]">person_outline</span><span class="font-label-sm text-label-sm">حسابي</span></a></div></nav></body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;font-family:'Tajawal',sans-serif;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-container": "#76849f",
+          "primary": "#0a192f",
+          "tertiary-container": "#001f27",
+          "secondary-container": "#dbeafe",
+          "tertiary-fixed": "#b3ebff",
+          "on-tertiary-fixed-variant": "#004e5f",
+          "on-secondary-fixed": "#001453",
+          "tertiary": "#000000",
+          "tertiary-fixed-dim": "#4cd6fb",
+          "on-secondary-fixed-variant": "#173bab",
+          "on-tertiary": "#ffffff",
+          "surface-container": "#eff4ff",
+          "on-surface": "#0b1c30",
+          "on-primary-fixed-variant": "#39475f",
+          "on-primary-fixed": "#0d1c32",
+          "on-tertiary-fixed": "#001f27",
+          "surface-variant": "#dce9ff",
+          "surface-container-highest": "#dce9ff",
+          "on-error": "#ffffff",
+          "surface": "#f8f9ff",
+          "surface-dim": "#cbdbf5",
+          "on-primary": "#ffffff",
+          "primary-container": "#0d1c32",
+          "background": "#f8f9ff",
+          "error-container": "#ffdad6",
+          "on-surface-variant": "#44474d",
+          "surface-container-lowest": "#ffffff",
+          "outline": "#75777e",
+          "on-tertiary-container": "#0090ad",
+          "on-secondary-container": "#1e40af",
+          "primary-fixed": "#d6e3ff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#eaf1ff",
+          "surface-container-low": "#eff4ff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#b8c4ff",
+          "outline-variant": "#c5c6cd",
+          "surface-container-high": "#dce9ff",
+          "error": "#ba1a1a",
+          "primary-fixed-dim": "#b9c7e4",
+          "inverse-surface": "#213145",
+          "on-background": "#0b1c30",
+          "secondary": "#2563eb",
+          "inverse-primary": "#b9c7e4",
+          "secondary-fixed": "#dde1ff",
+          "surface-tint": "#2563eb",
+          "surface-bright": "#f8f9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter": "1rem",
+          "space-md": "1rem",
+          "space-lg": "1.25rem",
+          "space-xs": "0.25rem",
+          "space-sm": "0.5rem",
+          "margin": "1rem",
+          "space-xl": "1.75rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Tajawal", "sans-serif"],
+          "headline-lg": ["Tajawal", "sans-serif"],
+          "title-md": ["Tajawal", "sans-serif"],
+          "label-sm": ["Tajawal", "sans-serif"],
+          "body-md": ["Tajawal", "sans-serif"],
+          "body-sm": ["Tajawal", "sans-serif"],
+          "label-md": ["Tajawal", "sans-serif"],
+          "headline-sm": ["Tajawal", "sans-serif"],
+          "label-lg": ["Tajawal", "sans-serif"],
+          "body-lg": ["Tajawal", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-surface-container-high/60 shadow-[0_1px_8px_rgba(10,25,47,0.04)] pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="رجوع" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-primary" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_forward</span></button><h1 class="font-headline-sm text-headline-sm text-primary font-bold">Job Details</h1></div><div class="flex items-center gap-space-sm"><button aria-label="مشاركة" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-primary"><span class="material-symbols-outlined text-[20px]">share</span></button><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-secondary/20" src="https://lh3.googleusercontent.com/aida/AEtjO1WrbQ_6Y17bOMP_6R0qUUVBIpCLfytYwecobb3O152iJHnFAwo2pPe-Rpa-3lksOxpLSkXFTvOFAfyc4IYUM2vPQgJL_Dc7aXt1M9pFdJdoQO1o4Eq7Ozx1T5zMgTgO93-AAAfiNpgbRrhAfgNELrlbsXUzyg_6C581m-plJGipvpxmjmZmh8pIdrNb76pPg89OhgE_Wh8iY_luurJVZSe629D0TxBIdsMG6TdOR3Ivdr9OGKeisxtgg1Q"></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="px-gutter pt-space-md pb-32 flex flex-col gap-space-lg">
+<!-- Top Floating Pill Status Bar -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold">التقديم متاح حالياً</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-outline">visibility</span>
+<span>284 مشاهدة</span>
+<span class="text-outline-variant">•</span>
+<span>نُشر قبل ساعتين</span>
+</div>
+</div>
+<!-- Job Header Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_4px_20px_-4px_rgba(10,25,47,0.06)] border border-surface-container-high/60 flex flex-col gap-space-md relative overflow-hidden">
+<div class="flex items-start gap-space-md">
+<div class="relative w-14 h-14 rounded-xl bg-surface-container-low border border-surface-container-high flex-shrink-0 overflow-hidden flex items-center justify-center p-0.5">
+<img class="w-full h-full object-cover rounded-lg" data-alt="Modern clean pharmacy logo badge with an emerald green botanical emblem, medical cross leaf motif, soft off-white background, minimalist vector style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh5Y0uceYOq_-bXSAI1C2BiLTBBv-UOX4kqTRj-Cz8zA0OqxRS-fXqPLRBFB7dco1WLDTFbnOUqoLntTRiOIQoPhpFSBoVlSwa_Q3u3BAVf9KgAcxa6Cp8rtkMtAl2U9r1Nt4AofgczNIf2k0LwM1sGZVSBnTZ_MX_UDJuw1g4hG4ZVe6hS_WHtsRsGVv3i4qBCyMt6TpVAvE647XdV2KVLfUhNpv0TI17hxdnQB4FZSJGo2R1JG7n8A">
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-primary font-bold leading-tight">صيدلي قانوني - مناوب مسائي</span>
+</div>
+<div class="flex items-center gap-1.5 mt-1 text-on-surface-variant">
+<span class="font-label-lg text-label-lg text-primary font-semibold">مجموعة صيدليات الشفاء الحديثة</span>
+<span class="material-symbols-outlined text-[18px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex items-center gap-1 mt-1 text-outline font-body-md text-body-md">
+<span class="material-symbols-outlined text-[18px] text-secondary">location_on</span>
+<span class="truncate">إب - شارع العدين، بجوار الجوازات</span>
+</div>
+</div>
+</div>
+<!-- Verified Employer Badge Strip -->
+<div class="bg-surface-container-low border border-surface-container-high/70 px-space-md py-2.5 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-secondary">domain_verification</span>
+<span class="font-label-md text-label-md text-on-surface">منشأة طبية مرخصة رسمياً بإب</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-bold">موثق</span>
+</div>
+</div>
+<!-- 4 Key Metrics Bento Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Metric 1: Salary -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-1 shadow-sm border border-surface-container-high/60">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[20px] text-secondary">payments</span>
+<span class="font-label-sm text-label-sm font-bold">الراتب الشهري</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary font-extrabold mt-1">350,000 - 450,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ريال يمني / شهرياً</span>
+</div>
+<!-- Metric 2: Shift -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-1 shadow-sm border border-surface-container-high/60">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span class="font-label-sm text-label-sm font-bold">نظام وساعات العمل</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-1">دوام كامل مسائي</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">من 5:00 م حتى 12:00 منتصف الليل</span>
+</div>
+<!-- Metric 3: Experience -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-1 shadow-sm border border-surface-container-high/60">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]">work_history</span>
+<span class="font-label-sm text-label-sm font-bold">الخبرة العملية</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-1">سنتين كحد أدنى</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">في صيدليات المجتمع والمشافي</span>
+</div>
+<!-- Metric 4: Qualification -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-1 shadow-sm border border-surface-container-high/60">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[20px]">school</span>
+<span class="font-label-sm text-label-sm font-bold">المؤهل الأكاديمي</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold mt-1">بكالوريوس صيدلة</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">جامعة معتمدة ومسجلة</span>
+</div>
+</div>
+<!-- Requirements Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-surface-container-high/60 flex flex-col gap-space-md">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">الشروط والمتطلبات</h2>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low/70 border border-surface-container-high/40">
+<span class="material-symbols-outlined text-[20px] text-secondary flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-body-md text-on-surface">كرت مزاولة مهنة صيدلة ساري المفعول صادر من وزارة الصحة ومكتب الصحة العامة والسكان بمحافظة إب.</p>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low/70 border border-surface-container-high/40">
+<span class="material-symbols-outlined text-[20px] text-secondary flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-body-md text-on-surface">إجادة العمل الاحترافي على الأنظمة الصيدلانية والمحاسبية الدوائية (نظام المتكامل أونكس برو / يمن سوفت).</p>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low/70 border border-surface-container-high/40">
+<span class="material-symbols-outlined text-[20px] text-secondary flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-body-md text-on-surface">حسن المظهر واللباقة العالية ومهارات الإرشاد الدوائي والتواصل الفعال مع المرضى والعملاء.</p>
+</div>
+<div class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low/70 border border-surface-container-high/40">
+<span class="material-symbols-outlined text-[20px] text-secondary flex-shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="font-body-md text-body-md text-on-surface">أن يكون المتقدم مقيماً بصورة دائمة في مدينة إب (يفضل مناطق الظهار، المشنة، أو شارع العدين والمناطق المجاورة).</p>
+</div>
+</div>
+</div>
+<!-- Responsibilities Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-surface-container-high/60 flex flex-col gap-space-md">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">المهام والمسؤوليات الرئيسية</h2>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 mt-0.5 font-label-sm text-label-sm font-bold">1</div>
+<p class="font-body-md text-body-md text-on-surface flex-1">صرف الوصفات الطبية بدقة متناهية والتأكد من التداخلات الدوائية وتقديم الاستشارة الصيدلانية الآمنة.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 mt-0.5 font-label-sm text-label-sm font-bold">2</div>
+<p class="font-body-md text-body-md text-on-surface flex-1">متابعة دقيقة لمخزون الأدوية، وحفظ السجلات، وتتبع تواريخ الصلاحية مع المشاركة في عمليات الجرد الدوري للصيدلية.</p>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center flex-shrink-0 mt-0.5 font-label-sm text-label-sm font-bold">3</div>
+<p class="font-body-md text-body-md text-on-surface flex-1">الإشراف على ترتيب الأصناف الدوائية ومراقبة درجات حرارة الثلاجات المخصصة للأنسولين واللقاحات والمضادات الحيوية.</p>
+</div>
+</div>
+</div>
+<!-- Benefits Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-surface-container-high/60 flex flex-col gap-space-md">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-secondary/15 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">redeem</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">المميزات والحوافز المقدمة</h2>
+</div>
+<div class="grid grid-cols-1 gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm border border-surface-container-high/50">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-xs">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-bold">بدل وجبة عشاء يومية</span>
+<span class="font-body-md text-body-md text-on-surface-variant">مخصص وجبة طازجة يومياً طوال أيام المناوبة</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm border border-surface-container-high/50">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-xs">
+<span class="material-symbols-outlined text-[22px]">trending_up</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-bold">عمولات شهرية على المبيعات</span>
+<span class="font-body-md text-body-md text-on-surface-variant">نسبة حوافز مجزية تضاف شهرياً لراتب الأساسي</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container flex items-center gap-space-sm border border-surface-container-high/50">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-xs">
+<span class="material-symbols-outlined text-[22px]">ac_unit</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-primary font-bold">بيئة عمل احترافية ومكيفة</span>
+<span class="font-body-md text-body-md text-on-surface-variant">صيدلية مجهزة بكاميرات مراقبة وشبكة طاقة شمسية مستمرة</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Preview & Interactive Map Embed -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-surface-container-high/60 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">place</span>
+<h2 class="font-headline-sm text-headline-sm text-primary font-bold">موقع العمل على الخريطة</h2>
+</div>
+<button class="flex items-center gap-1 text-secondary font-label-md text-label-md hover:underline font-bold" id="openNavBtn">
+<span>الاتجاهات</span>
+<span class="material-symbols-outlined text-[16px]">directions</span>
+</button>
+</div>
+<div class="w-full h-44 bg-surface-container-high rounded-xl overflow-hidden relative border border-surface-container-high" data-location="Ibb, Yemen, Al-Udayn Street" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAy5RAqZDessGsS_Hf7PIoCGeVR5ypEL3Ls20FVC5bcT_Q_M1NaMCyd67QtxB-Oq8behLmddBT448pECm6Qw3si_IEMXcPvWoQnZzeYiHEGAbl9nzFStC0OUcoXwXOOnqXkP1QusDT_WwBMRZIFj60gXYIBSAhumutko5jVWi-WPc0VbqQEqHcZNjBXiYOyg0CdWI2xKaQjOJRXEEa54CCA3k2oOrnbInnjSRb-MfQ-yQhRLX1dxr5kkw')">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-space-md">
+<div class="flex items-center gap-2 bg-surface-container-lowest/95 backdrop-blur-md px-3 py-2 rounded-lg shadow-md border border-surface-container-high/60">
+<span class="material-symbols-outlined text-[18px] text-secondary">local_pharmacy</span>
+<span class="font-label-md text-label-md text-primary font-bold">صيدلية الشفاء - فرع الجوازات</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sticky Action Bar -->
+<div class="fixed bottom-0 inset-x-0 z-40 bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container-high/80 shadow-[0_-8px_30px_rgba(10,25,47,0.08)] pb-safe pt-space-sm px-gutter">
+<div class="flex items-center gap-space-sm py-2">
+<!-- Instant Phone Call -->
+<a aria-label="اتصال بالمسؤول" class="w-12 h-12 flex-shrink-0 rounded-xl bg-surface-container hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center text-primary shadow-sm border border-surface-container-high/70" href="tel:+967770000000">
+<span class="material-symbols-outlined text-[24px]">call</span>
+</a>
+<!-- Instant WhatsApp Button (Yemeni Market Essential) -->
+<a class="h-12 px-space-md rounded-xl bg-[#25D366] text-white font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm flex-1" href="https://wa.me/967770000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%8A%D9%85%20%D9%84%D9%88%D8%B8%D9%8A%D9%81%D8%A9%20%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%20%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A" target="_blank">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.182-.077.357.101.174.45 1.744 1.34 2.126.357.153.649.207.876.136.23-.072.736-.852.934-1.144.197-.291.393-.243.661-.144.269.099 1.706.804 1.999.95.293.146.488.219.56.342.072.123.072.714-.072 1.119zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.176L2 22l4.981-1.306A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"></path>
+</svg>
+<span>واتساب</span>
+</a>
+<!-- Primary Apply Trigger -->
+<button class="h-12 px-space-lg rounded-xl bg-primary hover:bg-[#0f2342] text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-[0_4px_16px_rgba(10,25,47,0.35)] flex-[1.4]" id="applyModalBtn">
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed">send</span>
+<span>تقديم السيرة الذاتية</span>
+</button>
+</div>
+</div>
+<!-- Interactive Apply Drawer / Bottom Sheet Modal -->
+<div class="fixed inset-0 z-50 bg-[#0a192f]/60 backdrop-blur-sm hidden items-end justify-center transition-opacity opacity-0 pointer-events-none" id="applyDrawer">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-t-[24px] p-space-lg flex flex-col gap-space-md transform translate-y-full transition-transform duration-300 pb-safe border-t border-surface-container-high" id="drawerContent">
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto"></div>
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary font-bold">التقديم على الوظيفة</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">مجموعة صيدليات الشفاء - فرع إب</p>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" id="closeDrawerBtn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- CV Upload Container -->
+<div class="p-space-lg rounded-xl bg-surface-container-low border border-dashed border-secondary/40 flex flex-col items-center justify-center gap-space-sm text-center">
+<div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[26px]">upload_file</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary font-bold">ارفق ملف السيرة الذاتية (CV)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">صيغة PDF أو Word (الحد الأقصى 5 ميجابايت)</span>
+</div>
+<label class="mt-2 px-space-md py-2 rounded-lg bg-surface-container-lowest border border-surface-container-high font-label-md text-label-md text-secondary font-bold shadow-sm cursor-pointer hover:bg-surface-container transition-colors">
+<span>اختيار ملف من الهاتف</span>
+<input accept=".pdf,.doc,.docx" class="hidden" id="cvFileInput" type="file">
+</label>
+<span class="font-label-sm text-label-sm text-secondary font-bold hidden" id="selectedFileName"></span>
+</div>
+<!-- Short Note Field -->
+<div class="flex flex-col gap-1">
+<label class="font-label-md text-label-md text-on-surface font-semibold">رسالة تعريفية قصيرة (اختياري)</label>
+<textarea class="w-full bg-surface-container-low border border-surface-container-high/80 rounded-xl p-space-sm text-on-surface font-body-md text-body-md placeholder:text-outline outline-none focus:border-secondary resize-none" placeholder="ملاحظة أو سنوات الخبرة ونوع كرت المزاولة..." rows="2"></textarea>
+</div>
+<!-- Confirm Action Button -->
+<button class="w-full h-12 rounded-xl bg-primary hover:bg-[#0f2342] text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 active:scale-98 transition-all shadow-md" id="confirmSubmitBtn">
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed">check</span>
+<span>إرسال الطلب فوراً</span>
+</button>
+</div>
+</div>
+<script>
+    (function() {
+      const applyBtn = document.getElementById('applyModalBtn');
+      const drawer = document.getElementById('applyDrawer');
+      const drawerContent = document.getElementById('drawerContent');
+      const closeBtn = document.getElementById('closeDrawerBtn');
+      const cvInput = document.getElementById('cvFileInput');
+      const fileNameSpan = document.getElementById('selectedFileName');
+      const confirmSubmit = document.getElementById('confirmSubmitBtn');
+
+      function openModal() {
+        drawer.classList.remove('hidden');
+        setTimeout(() => {
+          drawer.classList.remove('opacity-0', 'pointer-events-none');
+          drawerContent.classList.remove('translate-y-full');
+        }, 10);
+      }
+
+      function closeModal() {
+        drawerContent.classList.add('translate-y-full');
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          drawer.classList.add('hidden');
+        }, 300);
+      }
+
+      if (applyBtn) applyBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      if (drawer) {
+        drawer.addEventListener('click', (e) => {
+          if (e.target === drawer) closeModal();
+        });
+      }
+
+      if (cvInput) {
+        cvInput.addEventListener('change', function(e) {
+          if (this.files && this.files[0]) {
+            fileNameSpan.textContent = 'تم اختيار الملف: ' + this.files[0].name;
+            fileNameSpan.classList.remove('hidden');
+          }
+        });
+      }
+
+      if (confirmSubmit) {
+        confirmSubmit.addEventListener('click', function() {
+          this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>جارٍ الإرسال...</span>';
+          setTimeout(() => {
+            this.className = 'w-full h-12 rounded-xl bg-secondary text-on-secondary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2';
+            this.innerHTML = '<span class="material-symbols-outlined text-[20px]">task_alt</span><span>تم تقديم طلبك بنجاح!</span>';
+            setTimeout(closeModal, 1200);
+          }, 1000);
+        });
+      }
+    })();
+  </script>
+</div></main></body></html>

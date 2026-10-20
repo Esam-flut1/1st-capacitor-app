@@ -1,0 +1,532 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_stack" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{width:100vw;margin:0;padding:0;font-family:'Tajawal',sans-serif;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-container": "#76849f",
+          "primary": "#0a192f",
+          "tertiary-container": "#001f27",
+          "secondary-container": "#dbeafe",
+          "tertiary-fixed": "#b3ebff",
+          "on-tertiary-fixed-variant": "#004e5f",
+          "on-secondary-fixed": "#001453",
+          "tertiary": "#000000",
+          "tertiary-fixed-dim": "#4cd6fb",
+          "on-secondary-fixed-variant": "#173bab",
+          "on-tertiary": "#ffffff",
+          "surface-container": "#e5eeff",
+          "on-surface": "#0b1c30",
+          "on-primary-fixed-variant": "#39475f",
+          "on-primary-fixed": "#0d1c32",
+          "on-tertiary-fixed": "#001f27",
+          "surface-variant": "#d3e4fe",
+          "surface-container-highest": "#d3e4fe",
+          "on-error": "#ffffff",
+          "surface": "#f8f9ff",
+          "surface-dim": "#cbdbf5",
+          "on-primary": "#ffffff",
+          "primary-container": "#0a192f",
+          "background": "#f8f9ff",
+          "error-container": "#ffdad6",
+          "on-surface-variant": "#44474d",
+          "surface-container-lowest": "#ffffff",
+          "outline": "#75777e",
+          "on-tertiary-container": "#0090ad",
+          "on-secondary-container": "#1e40af",
+          "primary-fixed": "#d6e3ff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#eaf1ff",
+          "surface-container-low": "#eff4ff",
+          "on-secondary": "#ffffff",
+          "secondary-fixed-dim": "#b8c4ff",
+          "outline-variant": "#c5c6cd",
+          "surface-container-high": "#dce9ff",
+          "error": "#ba1a1a",
+          "primary-fixed-dim": "#b9c7e4",
+          "inverse-surface": "#213145",
+          "on-background": "#0b1c30",
+          "secondary": "#2563eb",
+          "inverse-primary": "#b9c7e4",
+          "secondary-fixed": "#dde1ff",
+          "surface-tint": "#2563eb",
+          "surface-bright": "#f8f9ff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter-mobile": "1rem",
+          "space-md": "1rem",
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "gutter": "1rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1rem",
+          "margin": "1rem",
+          "space-xl": "1.75rem",
+          "margin-desktop": "3rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Tajawal", "sans-serif"],
+          "headline-lg": ["Tajawal", "sans-serif"],
+          "display-lg-mobile": ["Tajawal", "sans-serif"],
+          "display-lg": ["Tajawal", "sans-serif"],
+          "headline-xl-mobile": ["Tajawal", "sans-serif"],
+          "label-sm": ["Tajawal", "sans-serif"],
+          "body-md": ["Tajawal", "sans-serif"],
+          "body-sm": ["Tajawal", "sans-serif"],
+          "label-md": ["Tajawal", "sans-serif"],
+          "headline-sm": ["Tajawal", "sans-serif"],
+          "label-lg": ["Tajawal", "sans-serif"],
+          "headline-xl": ["Tajawal", "sans-serif"],
+          "body-lg": ["Tajawal", "sans-serif"],
+          "title-md": ["Tajawal", "sans-serif"]
+        },
+        "fontSize": {
+          "label-md": ["12px", {"lineHeight": "18px", "fontWeight": "600"}],
+          "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+          "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+          "title-md": ["18px", {"lineHeight": "26px", "fontWeight": "700"}],
+          "display-lg": ["32px", {"lineHeight": "44px", "fontWeight": "800"}],
+          "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+          "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+          "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700"}],
+          "headline-lg": ["24px", {"lineHeight": "34px", "fontWeight": "700"}]
+        }
+      }
+    }
+  }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-secondary-container selection:text-on-secondary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(10,25,47,0.06)] pt-safe"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="رجوع" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_forward</span></button><h1 class="font-title-md text-title-md text-primary font-bold">Post New Ad</h1></div><div class="flex items-center gap-space-sm"><button aria-label="مشاركة" class="w-11 h-11 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface"><span class="material-symbols-outlined text-[20px]">share</span></button><div class="relative flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-secondary/30" src="https://lh3.googleusercontent.com/aida/AEtjO1WrbQ_6Y17bOMP_6R0qUUVBIpCLfytYwecobb3O152iJHnFAwo2pPe-Rpa-3lksOxpLSkXFTvOFAfyc4IYUM2vPQgJL_Dc7aXt1M9pFdJdoQO1o4Eq7Ozx1T5zMgTgO93-AAAfiNpgbRrhAfgNELrlbsXUzyg_6C581m-plJGipvpxmjmZmh8pIdrNb76pPg89OhgE_Wh8iY_luurJVZSe629D0TxBIdsMG6TdOR3Ivdr9OGKeisxtgg1Q"></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-safe">
+<!-- Status / Progress Banner -->
+<div class="px-gutter pt-space-md">
+<div class="relative overflow-hidden rounded-full bg-gradient-to-r from-primary via-primary-container to-secondary p-space-lg shadow-xl text-on-primary">
+<!-- Glow & Ambient Orbs -->
+<div class="absolute -top-12 -left-12 w-36 h-36 bg-tertiary-fixed-dim/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-tertiary-fixed/20 text-tertiary-fixed text-label-sm font-label-sm backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px] text-amber-300" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span>باقة النخبة المهنية VIP</span>
+</div>
+<span class="inline-flex items-center gap-1 text-label-sm font-label-sm text-surface-container-highest bg-surface-container-highest/10 px-space-sm py-0.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            محافظة إب
+          </span>
+</div>
+<div class="flex items-start gap-space-md pt-space-xs">
+<div class="w-14 h-14 shrink-0 rounded-xl bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 text-primary">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md font-bold text-on-primary leading-tight">
+              العضوية الذهبية للباحثين عن عمل في إب
+            </h2>
+<p class="font-body-sm text-body-sm text-surface-container-high mt-1 leading-relaxed">
+              ضاعف فرص توظيفك وتواصل أصحاب الأعمال والمستشفيات والشركات معك بمقدار 5 أضعاف مع الشارة الذهبية الموثقة.
+            </p>
+</div>
+</div>
+<!-- Success Metric Ribbon -->
+<div class="mt-space-sm grid grid-cols-3 gap-space-xs pt-space-sm border-t border-surface-container-highest/15 text-center">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-tertiary-fixed-dim">5x</span>
+<span class="font-label-sm text-label-sm text-surface-container-highest">فرص المقابلات</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-amber-300">#1</span>
+<span class="font-label-sm text-label-sm text-surface-container-highest">صدارة محركات إب</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-tertiary-fixed-dim">100%</span>
+<span class="font-label-sm text-label-sm text-surface-container-highest">تواصل مباشر واتساب</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Key VIP Benefits Section -->
+<section class="px-gutter mt-space-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary">
+        امتيازات التوثيق والظهور الفائق
+      </h3>
+<span class="text-label-sm font-label-sm text-secondary font-bold">مزايا مخصصة للوظائف</span>
+</div>
+<div class="grid grid-cols-1 gap-space-xs">
+<!-- Item 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[24px]">vertical_align_top</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">صدارة كاملة لنتائج البحث</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            تثبيت ملفك في الصفحة الأولى لكافة منشآت ومستشفيات ومدارس إب عند فرز السير الذاتية.
+          </p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0 text-amber-600">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">شارة التوثيق الذهبية VIP</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            تأكيد هويتك المهنية لتمييزك فوراً عن آلاف المتقدمين وإعطائك أولوية الاختيار.
+          </p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[24px]">notifications_active</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">تنبيهات فورية لمسؤولي التوظيف (HR)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            إرسال إشعار فوري على لوحة تحكم صاحب العمل لحظة تقديمك لضمان معاينة طلبك أولاً.
+          </p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0 text-emerald-600">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">تواصل وتقديم واتساب مباشر</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            تفعيل زر المحادثة الفورية وتجاوز الانتظار الروتيني للمقابلات بدون وسيط.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Plans Section -->
+<section class="px-gutter mt-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary">
+          اختر باقة الترقية المعتمدة
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">الرسوم رسمية بالريال اليمني لتعزيز الحساب</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[24px]">local_offer</span>
+</div>
+<!-- Plan Options Radio Group -->
+<div class="flex flex-col gap-space-sm" id="plansContainer">
+<!-- Plan 1: 1 Week -->
+<label class="plan-card relative flex items-center justify-between p-space-md rounded-xl bg-surface-container-lowest shadow-sm cursor-pointer transition-all">
+<input class="sr-only plan-radio" data-plan="أسبوع (7 أيام)" name="subscription_plan" onchange="updateSelectedPlan(this, '5,000 ر.ي')" type="radio" value="5000">
+<div class="flex items-center gap-space-md">
+<div class="radio-indicator w-6 h-6 rounded-full bg-surface-container flex items-center justify-center shrink-0 transition-colors">
+<span class="dot w-2.5 h-2.5 rounded-full bg-white opacity-0 transition-opacity"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">باقة أسبوع</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">7 أيام</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">تثبيت السيرة الذاتية + شارة VIP الذهبية</p>
+</div>
+</div>
+<div class="text-left shrink-0">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">5,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">ريال يمني</span>
+</div>
+</label>
+<!-- Plan 2: 2 Weeks (Most Popular) -->
+<label class="plan-card relative flex items-center justify-between p-space-md rounded-xl bg-surface-container-lowest shadow-md cursor-pointer transition-all border-2 border-secondary/40">
+<input checked="" class="sr-only plan-radio" data-plan="أسبوعين (14 يوماً)" name="subscription_plan" onchange="updateSelectedPlan(this, '8,500 ر.ي')" type="radio" value="8500">
+<!-- Top Badge -->
+<div class="absolute -top-3 left-4 bg-gradient-to-r from-secondary to-secondary-container text-on-primary px-3 py-0.5 rounded-full text-label-sm font-label-sm shadow">
+          الأكثر طلباً • وفر 15%
+        </div>
+<div class="flex items-center gap-space-md">
+<div class="radio-indicator w-6 h-6 rounded-full bg-secondary flex items-center justify-center shrink-0 transition-colors">
+<span class="dot w-2.5 h-2.5 rounded-full bg-white opacity-100 transition-opacity"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">باقة أسبوعين</span>
+<span class="text-label-sm font-label-sm text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded-full">14 يوماً</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">صدارة البحث + إدراج بنشرة الوظائف الأسبوعية</p>
+</div>
+</div>
+<div class="text-left shrink-0">
+<span class="font-label-sm text-label-sm text-outline line-through block">10,000</span>
+<span class="font-headline-sm text-headline-sm font-bold text-secondary">8,500</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">ريال يمني</span>
+</div>
+</label>
+<!-- Plan 3: Full Month (Best Value) -->
+<label class="plan-card relative flex items-center justify-between p-space-md rounded-xl bg-surface-container-lowest shadow-sm cursor-pointer transition-all">
+<input class="sr-only plan-radio" data-plan="شهر كامل (30 يوماً)" name="subscription_plan" onchange="updateSelectedPlan(this, '15,000 ر.ي')" type="radio" value="15000">
+<!-- Top Badge -->
+<div class="absolute -top-3 left-4 bg-gradient-to-r from-amber-500 to-amber-600 text-on-primary px-3 py-0.5 rounded-full text-label-sm font-label-sm shadow">
+          أفضل قيمة • وفر 25%
+        </div>
+<div class="flex items-center gap-space-md">
+<div class="radio-indicator w-6 h-6 rounded-full bg-surface-container flex items-center justify-center shrink-0 transition-colors">
+<span class="dot w-2.5 h-2.5 rounded-full bg-white opacity-0 transition-opacity"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">باقة شهر كامل</span>
+<span class="text-label-sm font-label-sm text-amber-700 bg-amber-500/10 px-2 py-0.5 rounded-full">30 يوماً</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">توصية مباشرة لدى 10 شركات بإب + دعم مستمر</p>
+</div>
+</div>
+<div class="text-left shrink-0">
+<span class="font-label-sm text-label-sm text-outline line-through block">20,000</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">15,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">ريال يمني</span>
+</div>
+</label>
+</div>
+<!-- Active Summary Bar -->
+<div class="p-space-md rounded-xl bg-surface-container-high/60 flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-on-surface">
+<span class="material-symbols-outlined text-[20px] text-secondary">receipt_long</span>
+<span class="font-label-lg text-label-lg font-bold">إجمالي رسوم التفعيل:</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md font-bold text-primary" id="summaryAmount">8,500</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ريال يمني</span>
+</div>
+</div>
+</section>
+<!-- Payment Methods & Account Details Section -->
+<section class="px-gutter mt-space-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-primary">
+          طريقة السداد المعتمدة
+        </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">اختر المحفظة الأنسب ثم أدخل رقم الحوالة</p>
+</div>
+<span class="material-symbols-outlined text-secondary text-[24px]">account_balance_wallet</span>
+</div>
+<!-- Primary Payment Method Card (Jaib Wallet) -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-md flex flex-col gap-space-sm relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-28 h-28 bg-secondary/5 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary font-bold text-headline-sm">
+<span>جـ</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">محفظة جيب (Jaib)</span>
+<span class="text-label-sm font-label-sm bg-emerald-100 text-emerald-800 px-2 py-0.2 rounded-full">الخيار الأسرع</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">شركة عهد المالية للتمويل الأصغر</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-emerald-600 text-[24px]">flash_on</span>
+</div>
+<!-- Account Box with Quick Copy -->
+<div class="mt-space-xs p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">رقم الحساب التجاري المعتمد لـ وظائف إب:</span>
+<span class="font-headline-md text-headline-md font-bold tracking-wider text-primary select-all" id="accountNumber">770088836</span>
+</div>
+<button class="inline-flex items-center gap-1 px-3 py-2 rounded-lg bg-surface-container-highest hover:bg-secondary-container/40 active:scale-95 transition-all text-on-surface font-label-md text-label-md font-bold" onclick="copyAccountNumber()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="copyIcon">content_copy</span>
+<span id="copyText">نسخ الرقم</span>
+</button>
+</div>
+<div class="flex items-center gap-1.5 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span>اسم الحساب المستلم: <strong>منصة وظائف إب الرسمية</strong></span>
+</div>
+</div>
+<!-- Alternative Payment Options Badge List -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-primary">أو السداد عبر الشبكات والمحافظ المعتمدة الأخرى:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        الكريمي (حساب / إم فلوس)، محفظة كاش، محفظة فلوسك، ون كاش، أو عبر شبكة النجم والامتياز باسم: <strong>منصة وظائف إب</strong>
+</p>
+<div class="flex flex-wrap gap-1.5 mt-space-xs">
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">الكريمي جوال</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">محفظة كاش</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">ون كاش</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">فلوسك</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">النجم للحوالات</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">الامتياز</span>
+</div>
+</div>
+<!-- Transaction Input Verification Field -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<label class="flex flex-col gap-1" for="trxCode">
+<span class="font-headline-sm text-headline-sm font-bold text-primary flex items-center gap-1">
+<span>رقم إشعار الحوالة أو رمز العملية (TRX)</span>
+<span class="text-error">*</span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          قم بإدخال الرقم المرجعي المطبوع في إشعار الحوالة لتفعيل الشارة الذهبية فوراً
+        </span>
+</label>
+<div class="relative flex items-center">
+<span class="absolute right-3.5 material-symbols-outlined text-outline text-[20px] pointer-events-none">tag</span>
+<input class="w-full h-12 pr-11 pl-4 rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline text-body-md font-body-md focus:bg-surface-container-lowest focus:outline-none transition-all shadow-inner" id="trxCode" inputmode="numeric" placeholder="مثال: 948201582 أو TRX-78291" type="text">
+</div>
+<!-- Quick Upload Option (Optional Proof) -->
+<div class="flex items-center justify-between pt-space-xs text-label-sm font-label-sm text-on-surface-variant">
+<button class="inline-flex items-center gap-1 text-secondary font-bold hover:underline" type="button">
+<span class="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+<span>إرفاق لقطة شاشة للإشعار (اختياري)</span>
+</button>
+<span class="text-label-sm text-outline">يدعم PNG و JPG</span>
+</div>
+</div>
+</section>
+<!-- Safety & SLA Note -->
+<div class="px-gutter mt-space-md">
+<div class="p-space-sm rounded-xl bg-surface-container-high/50 flex items-start gap-space-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-emerald-600 text-[20px] shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+<strong>ضمان وتوثيق فوري:</strong> يتم التحقق الآلي من رقم العملية وتفعيل شارة VIP الذهبية وصدارة السيرة الذاتية لشركات محافظة إب خلال 5 إلى 15 دقيقة من إرسال الطلب.
+      </p>
+</div>
+</div>
+<!-- Primary CTA Action Footer -->
+<div class="px-gutter mt-space-lg mb-space-xl flex flex-col gap-space-sm">
+<button class="w-full h-14 rounded-xl bg-secondary hover:bg-secondary-container active:scale-[0.99] transition-all flex items-center justify-center gap-space-xs text-on-secondary font-headline-sm text-headline-sm font-bold shadow-lg shadow-secondary/30" id="submitButton" onclick="handleSubmission()" type="button">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+<span>تأكيد السداد وتفعيل العضوية الذهبية VIP</span>
+</button>
+<!-- Support Assistance Line -->
+<div class="flex items-center justify-center gap-space-xs text-label-md font-label-md text-on-surface-variant">
+<span>تواجه استفساراً في السداد؟</span>
+<a class="text-secondary font-bold hover:underline inline-flex items-center gap-0.5" href="#">
+<span>تواصل مع مسؤول الدعم المباشر بإب</span>
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  function updateSelectedPlan(radioElement, formattedPrice) {
+    // Reset visual styles for all cards
+    document.querySelectorAll('.plan-card').forEach(card => {
+      card.classList.remove('border-2', 'border-secondary/40', 'shadow-md');
+      card.classList.add('shadow-sm');
+      const ind = card.querySelector('.radio-indicator');
+      const dot = card.querySelector('.dot');
+      if (ind) {
+        ind.classList.remove('bg-secondary');
+        ind.classList.add('bg-surface-container');
+      }
+      if (dot) {
+        dot.classList.remove('opacity-100');
+        dot.classList.add('opacity-0');
+      }
+    });
+
+    // Highlight current selected card
+    const currentCard = radioElement.closest('.plan-card');
+    if (currentCard) {
+      currentCard.classList.add('border-2', 'border-secondary/40', 'shadow-md');
+      currentCard.classList.remove('shadow-sm');
+      const ind = currentCard.querySelector('.radio-indicator');
+      const dot = currentCard.querySelector('.dot');
+      if (ind) {
+        ind.classList.remove('bg-surface-container');
+        ind.classList.add('bg-secondary');
+      }
+      if (dot) {
+        dot.classList.remove('opacity-0');
+        dot.classList.add('opacity-100');
+      }
+    }
+
+    // Update bottom summary
+    const summarySpan = document.getElementById('summaryAmount');
+    if (summarySpan) {
+      summarySpan.innerText = Number(radioElement.value).toLocaleString('en-US');
+    }
+  }
+
+  function copyAccountNumber() {
+    const accountNum = document.getElementById('accountNumber').innerText.trim();
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(accountNum).then(() => {
+        showCopiedFeedback();
+      }).catch(() => {
+        fallbackCopy(accountNum);
+      });
+    } else {
+      fallbackCopy(accountNum);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const input = document.createElement('textarea');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    showCopiedFeedback();
+  }
+
+  function showCopiedFeedback() {
+    const copyText = document.getElementById('copyText');
+    const copyIcon = document.getElementById('copyIcon');
+    if (copyText && copyIcon) {
+      copyText.innerText = 'تم النسخ!';
+      copyIcon.innerText = 'check';
+      setTimeout(() => {
+        copyText.innerText = 'نسخ الرقم';
+        copyIcon.innerText = 'content_copy';
+      }, 2000);
+    }
+  }
+
+  function handleSubmission() {
+    const trx = document.getElementById('trxCode');
+    const val = trx ? trx.value.trim() : '';
+
+    if (!val) {
+      if (trx) {
+        trx.focus();
+        trx.classList.add('bg-error-container/40');
+        setTimeout(() => {
+          trx.classList.remove('bg-error-container/40');
+        }, 1800);
+      }
+      alert('يرجى كتابة رقم إشعار الحوالة أو رمز العملية (TRX) لإتمام التفعيل.');
+      return;
+    }
+
+    const btn = document.getElementById('submitButton');
+    if (btn) {
+      btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[24px]">progress_activity</span><span>جاري التحقق من السداد...</span>';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[24px] text-amber-300">verified</span><span>تم إرسال طلب الترقية الذهبية بنجاح!</span>';
+        btn.classList.remove('bg-secondary');
+        btn.classList.add('bg-primary');
+      }, 1500);
+    }
+  }
+</script></main></body></html>
