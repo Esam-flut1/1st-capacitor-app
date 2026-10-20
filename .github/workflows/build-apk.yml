@@ -27,8 +27,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+     
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: '16.0'
 
       - name: Install Capacitor
         run: |
@@ -37,6 +40,7 @@ jobs:
           fi
           npm install @capacitor/core@^7 @capacitor/android@^7
           npm install --save-dev @capacitor/cli@^7
+
 
       - name: Prepare web files
         run: |
